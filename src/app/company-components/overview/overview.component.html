@@ -1,0 +1,135 @@
+<app-banner></app-banner>
+<div id="main">
+  <div id="pageBackground">
+    <div id="header">
+      <div id="headerTitle">
+        Overview
+      </div>
+      <div id="bellBackground" class="center">
+        <img src="../../../assets/img/icon-bell.png" width="22px" height="22px">
+      </div>
+    </div>
+    <div id="tabsBar">
+      <div
+        style="width: 60px;" class="center tab" [class.selectedTab]="selectedTab == 1" (click)="selectDate(1)">
+        All
+      </div>
+      <div style="width: 60px;" class="center tab" [class.selectedTab]="selectedTab == 2" (click)="selectDate(2)">
+        7 d
+      </div>
+      <div style="width: 75px;" class="center tab" [class.selectedTab]="selectedTab == 3" (click)="selectDate(3)">
+        30 d
+      </div>
+      <div style="width: 75px;" class="center tab" [class.selectedTab]="selectedTab == 4" (click)="selectDate(4)">
+        year
+      </div>
+    </div>
+    <div id="statsBar">
+      <div
+        class="stat blackStat">
+        <div class="statTitle">
+          Orders
+        </div>
+        <div class="statValuesContainer">
+          <div class="statValue blackStatValue">
+            {{ stats.orders }}
+          </div>
+          <div class="center">
+            <div class="statValueChange blackStatValueChange centerVertically"
+                 *ngIf="selectedTab != 1 && stats.ordersChange != 0">
+              <span *ngIf="stats.ordersChange > 0">+{{ stats.ordersChange }}<img
+                src="../../../assets/img/icon-up-right.png" height="18px" width="18px"></span>
+              <span *ngIf="stats.ordersChange < 0">{{ stats.ordersChange }}<img
+                src="../../../assets/img/icon-down-right.png" height="18px" width="18px"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="statTitle">
+          Income
+        </div>
+        <div class="statValuesContainer">
+          <div class="statValue">
+            {{ stats.income }}
+          </div>
+          <div class="center">
+            <div class="statValueChange centerVertically" *ngIf="selectedTab != 1 && stats.incomeChange != 0">
+              <span *ngIf="stats.incomeChange > 0">+{{ stats.incomeChange | number:'1.0-0' }} %<img
+                src="../../../assets/img/icon-up-right.png" height="18px" width="18px"></span>
+              <span *ngIf="stats.incomeChange < 0">{{ stats.incomeChange | number:'1.0-0' }} %<img
+                src="../../../assets/img/icon-down-right.png" height="18px" width="18px"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="statTitle">
+          Sold products
+        </div>
+        <div class="statValuesContainer">
+          <div class="statValue">
+            {{ stats.soldProducts }}
+          </div>
+          <div class="center">
+            <div class="statValueChange centerVertically" *ngIf="selectedTab != 1 && stats.soldProductsChange != 0">
+              <span *ngIf="stats.soldProductsChange > 0">+{{ stats.soldProductsChange }}<img
+                src="../../../assets/img/icon-up-right.png" height="18px" width="18px"></span>
+              <span *ngIf="stats.soldProductsChange < 0">{{ stats.soldProductsChange }}<img
+                src="../../../assets/img/icon-down-right.png" height="18px" width="18px"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="statTitle">
+          Comments
+        </div>
+        <div class="statValuesContainer">
+          <div class="statValue">
+            {{ stats.comments }}
+          </div>
+          <div class="center">
+            <div class="statValueChange centerVertically" *ngIf="selectedTab != 1 && stats.commentsChange != 0">
+              <span *ngIf="stats.commentsChange > 0">+{{ stats.commentsChange }}<img
+                src="../../../assets/img/icon-up-right.png" height="18px" width="18px"></span>
+              <span *ngIf="stats.commentsChange < 0">{{ stats.commentsChange }}<img
+                src="../../../assets/img/icon-down-right.png" height="18px" width="18px"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="chartsBarTitle">
+      Orders
+    </div>
+    <div id="chartsBar">
+      <div class="chartCard">
+        <div class="chartTitleContainer">
+          <span class="chartTitle">Period</span>
+          <br>
+          <span class="timePeriod">{{ endDateStr }} - {{ startDateStr }}</span>
+        </div>
+        <div class="chart">
+          <canvas id="myChart2d" #myChart2></canvas>
+        </div>
+      </div>
+      <div class="chartCard">
+        <div class="chartTitleContainer">
+          <span class="chartTitle">Income</span>
+        </div>
+        <div class="chart">
+          <canvas id="myChart3d" #myChart3></canvas>
+        </div>
+      </div>
+      <div id="pieChartCard">
+        <div id="pieChartTitleContainer">
+          <span class="chartTitle">Products type</span>
+        </div>
+        <div id="pieChart">
+          <canvas id="myChart1d" #myChart1></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

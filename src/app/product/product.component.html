@@ -1,0 +1,104 @@
+<app-banner></app-banner>
+<div id="main">
+  <div>
+    <div class="slideshow-container">
+      <ng-container *ngFor="let image of [].constructor(product.images); let i = index">
+        <div class="mySlides" [hidden]="slideIndex !== i+1">
+          <div class="numbertext">{{ i + 1 }} / {{ product.images }}</div>
+          <img class="image" id="{{ i }}i"/>
+        </div>
+      </ng-container>
+      <img src="assets/img/icon-left-arrow-2.png"  class="leftArrow" width="40px" height="40px" (click)="plusSlides(-1)" *ngIf="product.images > 1">
+      <img src="assets/img/icon-right-arrow-2.png" class="rightArrow" width="40px" height="40px" (click)="plusSlides(1)" *ngIf="product.images > 1">
+    </div>
+  </div>
+  <div id="productData">
+    <h3 class="company"> {{ product.companyName }} </h3>
+    <span class="productTitle"> {{ product.name }} </span>
+    <br>
+    <span *ngIf="product.discountPrice == null">{{ product.price | number : '1.2-2' }} PLN</span>
+    <span *ngIf="product.discountPrice != null">{{ product.discountPrice | number : '1.2-2' }} PLN</span>
+    <hr>
+    <ng-container *ngFor="let size of product.sizes;">
+      <span *ngIf="size.quantity == 0" class="unavailableSize">
+        {{ size.sizeValue }}
+      </span>
+      <span (click)="selectSize(size.id, size.quantity)" *ngIf="size.quantity > 0" class="size" id="{{ size.id }}"
+            #myButtons>
+        {{ size.sizeValue }}
+      </span>
+    </ng-container>
+    <hr>
+    <div class="amountSelectedContainer">
+      <input type="number" min="1" class="amountSelected" id="pieces" [hidden]="!isSizeSelected" #piecesInp/>
+      <div class="selectSize" [hidden]="isSizeSelected">
+        Select size
+      </div>
+    </div>
+    <hr>
+    <span class="productDataCategory" (click)="showFilters('1')">
+      Description
+      <img src="../../assets/img/icon-forward.png" class="arrow" *ngIf="openedFilters.indexOf('1') === -1"/>
+      <img src="../../assets/img/icon-expand-arrow.png" class="arrow" *ngIf="openedFilters.indexOf('1') !== -1"/>
+    </span>
+    <div class="filter-container container" [ngClass]="{ opened: openedFilters.indexOf('1') !== -1 }">
+      {{ product.description }}
+    </div>
+    <hr>
+    <span class="productDataCategory" (click)="showFilters('2')">
+      Details
+      <img src="../../assets/img/icon-forward.png" class="arrow" *ngIf="openedFilters.indexOf('2') === -1"/>
+      <img src="../../assets/img/icon-expand-arrow.png" class="arrow" *ngIf="openedFilters.indexOf('2') !== -1"/>
+    </span>
+    <div class="filter-container container" [ngClass]="{ opened: openedFilters.indexOf('2') !== -1 }">
+      <ng-container *ngFor="let param of product.parameters">
+        <span class="parameter">
+          - {{ param.key }}:
+          <span class="parameterValue">
+            {{ param.value }}
+          </span>
+        </span>
+        <br>
+      </ng-container>
+    </div>
+    <hr>
+    <span class="productDataCategory" (click)="showFilters('3')">
+      Reviews {{ productStars | number : '1.2-2' }}
+      <img src="../../assets/img/icon-forward.png" class="arrow" *ngIf="openedFilters.indexOf('3') === -1"/>
+      <img src="../../assets/img/icon-expand-arrow.png" class="arrow" *ngIf="openedFilters.indexOf('3') !== -1"/>
+    </span>
+    <div class="filter-container" [ngClass]="{ opened: openedFilters.indexOf('3') !== -1 }">
+      5:
+      <span class="starRating">
+        {{ fiveStar }}
+      </span>
+      , 4:
+      <span class="starRating">
+        {{ fourStar }}
+      </span>
+      , 3:
+      <span class="starRating">
+        {{ threeStar }}
+      </span>
+      , 2:
+      <span class="starRating">
+        {{ twoStar }}
+      </span>
+      , 1:
+      <span class="starRating">
+        {{ oneStar }}
+      </span>
+    </div>
+    <hr>
+    <br>
+    <div class="buttonsContainer">
+      <div class="addProductButton" (click)="addProductToCart('product.imageKeys[0]')">
+        ADD TO BAG
+      </div>
+      <div class="checkoutButton" (click)="placeOrder()">
+        CHECKOUT
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

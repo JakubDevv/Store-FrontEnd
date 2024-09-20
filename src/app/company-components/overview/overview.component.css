@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+#main {
+  position: absolute;
+  top: 110px;
+  width: 100%;
+  height: calc(100% - 110px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-width: 1400px;
+  background-color: #f8f8f8;
+}
+
+#leftPannel {
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+
+#rightPannel {
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+
+#orders {
+  width: 520px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.stats {
+  font-size: 40px;
+  color: black;
+  padding-left: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.smallInfo {
+  width: 300px;
+  height: 140px;
+  border-radius: 20px;
+  box-shadow: 10px 10px 50px #cccccc;
+  margin: 20px;
+  float: left;
+  padding-top: 10px;
+  padding-left: 10px;
+  border: 1px solid black;
+}
+
+.cellHeader {
+  color: black;
+  font-size: 17px;
+  padding-left: 7px;
+}
+
+.bigInfo {
+  padding-top: 10px;
+  width: 300px;
+  height: 120px;
+  border-radius: 20px;
+  border: 1px solid black;
+  margin: 20px;
+  float: left;
+  padding-left: 10px;
+  box-shadow: 10px 10px 50px #cccccc;
+}
+
+.earningsInTime {
+  width: 600px;
+  height: 300px;
+  margin: 10px;
+}
+
+.order {
+  width: 480px;
+  height: 100px;
+  margin: 10px 10px 10px 10px;
+  float: left;
+  display: flex;
+  color: black;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.productQuantity {
+  width: 90px;
+  height: 100px;
+  text-align: center;
+  padding: 10px;
+}
+
+.price {
+  width: 140px;
+  height: 100px;
+  float: left;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100px;
+}
+
+.productsCategory {
+  width: 150px;
+  height: 100px;
+  float: right;
+}
+
+.userImage {
+  width: 100px;
+  height: 80px;
+  float: right;
+  text-align: center;
+  padding-top: 3px;
+}
+
+.date {
+  width: 100px;
+  height: 20px;
+  float: right;
+  text-align: center;
+  font-size: 14px;
+}
+
+.product:hover {
+  cursor: pointer;
+}
+
+.statHeader {
+  height: 60px;
+  width: 50%;
+  float: left;
+  color: black;
+}
+
+.singleStat {
+  width: 300px;
+  height: 240px;
+  float: left;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 240px;
+  color: #7f7989;
+}
+
+.center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.tab {
+  background-color: #ececec;
+  height: 40px;
+  border-radius: 20px;
+  float: left;
+  margin-right: 10px;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.selectedTab {
+  border: 2px solid #ececec;
+  background-color: white;
+}
+
+#pageBackground {
+  width: 1400px;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#bellBackground {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  background-color: #ececec;
+}
+
+#header {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#headerTitle {
+  font-size: 37px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+}
+
+#tabsBar {
+  height: 40px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+#statsBar {
+  width: 100%;
+  height: 210px;
+  margin-top: 20px;
+}
+
+.stat {
+  width: 340px;
+  height: 100%;
+  border-radius: 20px;
+  background-color: white;
+  color: white;
+  float: left;
+}
+
+.blackStat {
+  background-color: black;
+  box-shadow: 20px 20px 50px grey;
+}
+
+.statTitle {
+  height: 110px;
+  width: 100%;
+  padding: 20px 0 0 20px;
+  color: #a6a6a6;
+  font-size: 19px;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 400
+}
+
+.centerVertically {
+  display: flex;
+  align-items: center;
+}
+
+.statValueChange {
+  height: 30px;
+  background-color: black;
+  border-radius: 20px;
+  color: white;
+  padding: 0 5px 0 5px;
+  font-size: 17px;
+  margin-right: 20px;
+}
+
+.blackStatValueChange {
+  background-color: blue;
+  border-radius: 20px;
+}
+
+.statValuesContainer {
+  height: 100px;
+  width: 100%;
+  padding-left: 20px;
+  justify-content: space-between;
+  display: flex;
+}
+
+.statValue {
+  font-size: 55px;
+  color: black;
+}
+
+.blackStatValue {
+  color: white;
+}
+
+#statsBar {
+  width: 100%;
+  height: 210px;
+  margin-top: 20px;
+  justify-content: space-between;
+  display: flex;
+}
+
+.chartTitle {
+  font-size: 18px;
+  color: #a6a6a6;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 400;
+}
+
+.chartTitleContainer {
+  height: 80px;
+  width: 100%;
+  float: left;
+  padding: 15px 0 0 15px;
+}
+
+#pieChart {
+  width: 100%;
+  height: 290px;
+  float: left;
+}
+
+.chart {
+  margin-right: auto;
+  margin-left: auto;
+  float: left;
+  height: 250px;
+  width: 100%;
+  border: 1px solid white;
+}
+
+.chartCard {
+  height: 100%;
+  width: 550px;
+  background-color: white;
+  border-radius: 20px;
+  margin-right: 10px;
+  float: left;
+}
+
+#pieChartCard {
+  height: 100%;
+  width: 270px;
+  background-color: white;
+  border-radius: 20px;
+  float: left;
+}
+
+.timePeriod {
+  font-size: 17px;
+  color: black;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 400;
+}
+
+#pieChartTitleContainer {
+  height: 40px;
+  width: 100%;
+  float: left;
+  padding: 15px 0 0 15px;
+}
+
+#chartsBar {
+  width: 100%;
+  height: 330px;
+  margin-top: 12px;
+}
+
+#chartsBarTitle {
+  width: 100%;
+  height: 35px;
+  margin-top: 20px;
+  font-size: 22px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+}

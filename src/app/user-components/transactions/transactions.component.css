@@ -1,0 +1,594 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,500;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+
+.urbanist-regular {
+  font-family: "Urbanist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#main {
+  width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 60px;
+}
+
+.transaction-date {
+  height: 35px;
+  width: 100%;
+  float: left;
+  padding-top: 10px;
+}
+
+.transaction-time {
+  height: 35px;
+  width: 100%;
+  font-size: 14px;
+  color: grey;
+  float: left;
+}
+
+#header {
+  justify-content: space-between;
+  display: flex;
+  border-bottom: 1px solid #cccccc;
+  height: 80px;
+}
+
+#headerTitle {
+  font-size: 45px;
+  display: inline;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+#balanceContainer {
+  height: 80px;
+  width: 240px;
+}
+
+#balanceTitle {
+  height: 23px;
+  width: 200px;
+  color: grey;
+  font-size: 15px;
+}
+
+#balanceValue {
+  height: 57px;
+  width: 200px;
+  font-size: 30px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+
+#tableHeader {
+  height: 50px;
+  width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 1px solid #838382;
+  margin-top: 10px;
+  color: grey;
+}
+
+.positiveChange {
+  color: #000000;
+  font-size: 13px;
+}
+
+.negativeChange {
+  color: #000000;
+  font-size: 13px;
+}
+
+.tableRow {
+  height: 70px;
+  width: 885px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  border-bottom: 1px solid #f1f1f1;
+  cursor: pointer;
+}
+
+.center2 {
+  align-items: center;
+  display: flex;
+}
+
+.headerColumn {
+  height: 40px;
+  float: left;
+}
+
+.tableColumn {
+  height: 70px;
+  float: left;
+}
+
+.idColumn {
+  width: 70px;
+  color: dodgerblue;
+}
+
+.dateColumn {
+  width: 150px;
+}
+
+.typeColumn {
+  width: 120px;
+}
+
+.nameColumn {
+  width: 460px;
+}
+
+.amountColumn {
+  width: 190px;
+}
+
+.orderIdColumn {
+  width: 80px;
+}
+
+.sent {
+  color: red;
+}
+
+.received {
+  color: green;
+}
+
+.storeTransaction {
+  color: dodgerblue;
+  font-weight: bolder;
+  font-size: 23px;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.center3 {
+  justify-content: center;
+  display: flex;
+}
+
+.pageButton {
+  height: 50px;
+  width: 50px;
+  float: left;
+}
+
+.activePage {
+  height: 30px;
+  width: 30px;
+  margin: 10px;
+  font-size: 19px;
+  font-family: 'Inter', sans-serif;
+  background-color: whitesmoke;
+  color: black;
+  cursor: pointer;
+}
+
+.page {
+  height: 30px;
+  width: 30px;
+  margin: 10px;
+  font-size: 19px;
+  font-family: 'Inter', sans-serif;
+  color: grey;
+  cursor: pointer;
+}
+
+.paginationBar {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+}
+
+#transactions {
+  width: 900px;
+  float: left;
+  margin-top: 20px;
+}
+
+#stats {
+  width: 500px;
+  float: left;
+  height: 950px;
+  padding: 0 30px 0 30px;
+}
+
+#userCard {
+  width: 100%;
+  height: 180px;
+}
+
+.userPhoto {
+  border-radius: 46px;
+}
+
+#userChange {
+  width: 150px;
+  height: 180px;
+  float: left;
+  position: relative;
+}
+
+.name {
+  width: 100%;
+  height: 40px;
+  font-size: 25px;
+  text-align: left;
+  font-family: 'Sometype Mono', monospace;
+}
+
+.username {
+  width: 100%;
+  height: 30px;
+  font-size: 20px;
+  text-align: left;
+  font-family: 'Sometype Mono', monospace;
+}
+
+.companyNameValue {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  font-size: 25px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.companyNameHeader {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  font-size: 13px;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  width: 110px;
+}
+
+.company {
+  width: 100%;
+  height: 60px;
+  font-size: 19px;
+  text-align: left;
+  position: relative;
+}
+
+.companyCard {
+  width: 100%;
+  height: 20px;
+  font-size: 19px;
+  text-align: left;
+  position: relative;
+  margin-top: 15px;
+}
+
+.companyCard2 {
+  position: absolute;
+  font-size: 13px;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  width: 70px
+}
+
+.inpt {
+  width: 210px;
+  text-align: left;
+  display: flex;
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.chart {
+  width: 100%;
+  height: 220px;
+  float: left;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.pieChart {
+  height: 80px;
+  width: 80px;
+  border-radius: 15px;
+  float: left;
+  padding: 9px;
+}
+
+.statHeader {
+  width: 100%;
+  height: 50px;
+  float: left;
+  font-size: 20px;
+  padding-top: 10px;
+}
+
+.expensesByCategory {
+  width: 100%;
+  float: left;
+  margin-top: 10px;
+}
+
+#expensesTitle {
+  width: 100%;
+  height: 50px;
+  float: left;
+  font-size: 20px;
+  padding-top: 10px;
+  margin-top: 20px;
+}
+
+.expense {
+  width: 100%;
+  height: 80px;
+  background-color: #5cabef;
+  border-radius: 15px;
+}
+
+.firstExpense {
+  background-color: #314a86;
+}
+
+.secondExpense {
+  background-color: #5cabef;
+  margin: 15px 0 15px 0;
+}
+
+.thirdExpense {
+  background-color: #314d70;
+}
+
+.expensePrice {
+  width: calc(100% - 80px);
+  height: 40px;
+  float: left;
+  padding-left: 12px;
+}
+
+.expenseCategory {
+  width: calc(100% - 80px);
+  height: 40px;
+  float: left;
+  padding-top: 12px;
+  color: white;
+  position: relative;
+  padding-left: 12px;
+}
+
+.expensePercentage {
+  right: 25px;
+  position: absolute;
+}
+
+.firstExpensePercentage {
+  color: #ffffff;
+}
+
+.secondExpensePercentage {
+  color: #273e77;
+}
+
+.thirdExpensePercentage {
+  color: #5cabef;
+}
+
+.statValue {
+  right: 0;
+  position: absolute;
+}
+
+.mainStat {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.stat {
+  width: 100%;
+  height: 30px;
+  position: relative;
+}
+
+.customLine {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.statContainer {
+  width: 100%;
+  height: 150px;
+  float: left;
+  background-color: #e6e6e6;
+  border-radius: 5px;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.statTitle {
+  color: #4d4d4d;
+}
+
+.inp {
+  border-color: rgb(117 117 117);
+  border-left-width: 0 !important;
+  border-radius: 0 !important;
+  border-right-width: 0 !important;
+  border-top-width: 0 !important;
+  border-bottom-width: 1px;
+  box-shadow: none !important;
+  font-weight: 400 !important;
+  outline: .125rem solid transparent !important;
+  outline-offset: .125rem !important;
+  height: 30px;
+  font-size: 19px;
+  width: 170px;
+}
+
+.changeProfilePictureButton {
+  border-radius: 10px;
+  display: none;
+  z-index: 2;
+  position: absolute;
+  bottom: 10px;
+  left: 25px;
+}
+
+.changeProfilePictureButton2 {
+  background-color: black;
+  border-radius: 20px;
+  position: absolute;
+  width: 100px;
+  height: 20px;
+  font-size: 13px;
+  text-align: center;
+  line-height: 20px;
+  font-weight: 500;
+  color: white;
+  z-index: 5;
+  bottom: 10px;
+  left: 25px;
+  cursor: pointer;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.selectedTransaction {
+  background-color: #21201f;
+  color: white;
+}
+
+.mg-r-3 {
+  margin-right: 3px;
+}
+
+.timestamp {
+  border-right: 1px solid #f1f1f1;
+  height: 100%;
+  width: 170px;
+  padding: 25px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.stat-container {
+  border-right: 1px solid #f1f1f1;
+  height: 100%;
+  width: 250px;
+  padding: 25px;
+}
+
+.stat-header {
+  color: gray;
+}
+
+.space-between {
+  justify-content: space-between;
+  display: flex;
+}
+
+.h-100-w-100 {
+  height: 100px;
+  width: 100%;
+  display: flex;
+}
+
+.transaction-list {
+  width: 100%;
+  height: 810px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.h-790 {
+  height: 790px;
+}
+
+.user-data {
+  width: 285px;
+  height: 180px;
+  float: left;
+  padding: 18px 0 0 18px;
+}
+
+.transaction-type-background {
+  height: 50px;
+  width: 50px;
+  border-radius: 20px;
+  background-color: whitesmoke;
+}
+
+.transaction-products {
+  height: 35px;
+  width: 100%;
+  float: left;
+  font-size: 13px;
+  color: grey;
+}
+
+.transaction-name {
+  height: 35px;
+  width: 100%;
+  float: left;
+  padding-top: 10px;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.w-70 {
+  width: 70px;
+}
+
+.w-330 {
+  float: left;
+  width: 330px;
+}
+
+.display-inline {
+  display: inline;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

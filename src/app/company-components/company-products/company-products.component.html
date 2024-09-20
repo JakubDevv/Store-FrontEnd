@@ -1,0 +1,406 @@
+<app-banner></app-banner>
+<div id="main2">
+  <div id="main">
+    <div id="left">
+      <div id="header">
+        <div>
+          <div id="pageTitle">
+            Products
+          </div>
+          <div class="filterContainer">
+            <span class="filterTitle">Status</span>
+            <span class="filterValue" (click)="changeStatus()">{{ filterByStatus }}</span>
+          </div>
+          <div class="searchContainer">
+            <div class="lupe-container center">
+              <img src="assets/img/icon-search.png" width="27px" height="27px">
+            </div>
+            <input type="email" class="inp5 search" placeholder="Search" [(ngModel)]="searchText">
+          </div>
+        </div>
+        <div class="addProductContainer" (click)="selected = 'add'">
+          <img src="assets/img/icon-plus-white.png" width="20px" height="20px">
+        </div>
+      </div>
+      <div class="customColumn">
+        <div class="headerTableRow">
+          <div class="headerTableColumn idColumn center">#</div>
+          <div class="headerTableColumn offerColumn centerVertically">Name</div>
+          <div class="headerTableColumn dateColumn centerVertically">Date</div>
+          <div class="headerTableColumn salesColumn centerVertically">Sales</div>
+          <div class="headerTableColumn availabilityColumn centerVertically">Available</div>
+          <div class="headerTableColumn priceColumn centerVertically">Price</div>
+          <div class="headerTableColumn incomeColumn centerVertically">Income</div>
+          <div class="headerTableColumn statusColumn centerVertically">Status</div>
+        </div>
+        <div class="example productsContainer">
+          <ng-container *ngFor="let productt of products | search: searchText">
+            <div class="tableRow" (click)="showProduct(productt.id)"
+                 [class.selectedProduct]="productt.id == product.id">
+              <div class="tableColumn idColumn center">
+                {{ productt.id }}
+              </div>
+              <div class="tableColumn offerColumn centerVertically">
+                <div class="productImage">
+                  <img [src]="productt.image" [id]="productt.id" class="image">
+                </div>
+                <div class="productMainData">
+                  <span class="productName notoSansBold">{{ productt.name }}</span>
+                  <span class="productCategory"
+                        [ngStyle]="{'color': (productt.categoryActive ? 'red' : 'grey')}">{{ productt.category }}</span>
+                </div>
+              </div>
+              <div class="tableColumn dateColumn">
+                <span class="month">{{ productt.date | date: 'd MMM' }}</span>
+                <span class="year">{{ productt.date | date: 'y' }}</span>
+              </div>
+              <div class="tableColumn salesColumn centerVertically notoSans">
+                {{ productt.sales }}
+              </div>
+              <div class="tableColumn availabilityColumn centerVertically notoSans">
+              <span [ngStyle]="{'color': (productt.available > 0 ? 'black' : 'red')}" *ngIf="productt.active">
+                {{ productt.available }}
+              </span>
+              </div>
+              <div class="tableColumn priceColumn">
+                <div class="tablePrices" *ngIf="productt.discount_price != null">
+                  <span class="tableDiscountPrice notoSans">${{ productt.discount_price | number: '1.2-2' }}</span>
+                  <span class="tablePrice">${{ productt.price | number: '1.2-2' }}</span>
+                </div>
+                <div class="tablePrice2 notoSans centerVertically" *ngIf="productt.discount_price == null">
+                  ${{ productt.price | number: '1.2-2' }}
+                </div>
+              </div>
+              <div class="tableColumn incomeColumn notoSans centerVertically">
+                {{ productt.income | number: '1.2-2' }}
+              </div>
+              <div class="tableColumn statusColumn center notoSans">
+                <div class="activeContainer" *ngIf="productt.active">
+                  Active
+                </div>
+                <div class="retiredContainer" *ngIf="!productt.active">
+                  Retired
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="rightSideContainer">
+      <ng-container *ngIf="selected == 'default'">
+        <div class="expenseCard">
+          <div class="expense firstExpense" *ngIf="stat?.expenseCategoryList && stat.expenseCategoryList.length > 0">
+            <div class="pieChart center">
+              <canvas id="myChart4" #myChart4></canvas>
+            </div>
+            <div class="expenseCategory">
+              {{ stat.expenseCategoryList[0].category }}
+              <span class="expensePercentage">{{ stat.expenseCategoryList[0].percentage }}%</span>
+            </div>
+            <div class="expensePrice">
+              PLN {{ stat.expenseCategoryList[0].amount | number: '1.2-2' }}
+            </div>
+          </div>
+          <div class="expense secondExpense" *ngIf="stat?.expenseCategoryList && stat.expenseCategoryList.length > 1">
+            <div class="pieChart center">
+              <canvas id="myChart5" #myChart5></canvas>
+            </div>
+            <div class="expenseCategory">
+              {{ stat.expenseCategoryList[1].category }}
+              <span class="expensePercentage">{{ stat.expenseCategoryList[1].percentage }}%</span>
+            </div>
+            <div class="expensePrice">
+              PLN {{ stat.expenseCategoryList[1].amount | number: '1.2-2' }}
+            </div>
+          </div>
+          <div class="expense thirdExpense" *ngIf="stat?.expenseCategoryList && stat.expenseCategoryList.length > 2">
+            <div class="pieChart center">
+              <canvas id="myChart6" #myChart6></canvas>
+            </div>
+            <div class="expenseCategory">
+              {{ stat.expenseCategoryList[2].category }}
+              <span class="expensePercentage">{{ stat.expenseCategoryList[2].percentage }}%</span>
+            </div>
+            <div class="expensePrice">
+              PLN {{ stat.expenseCategoryList[2].amount | number: '1.2-2' }}
+            </div>
+          </div>
+          <div class="dotsContainer">
+            <img src="assets/img/icon-dot.png" height="10px" width="10px" class="dot">
+            <img src="assets/img/icon-dot.png" height="10px" width="10px" class="dot">
+            <img src="assets/img/icon-dot.png" height="10px" width="10px" class="dot">
+          </div>
+        </div>
+        <div class="statCard">
+          <div class="statMain">
+            <span>Total Income</span>
+            <span class="statValue1">${{ stat.avgMonthlyIncome | number:'1.2-2' }}</span>
+          </div>
+          <div class="stat2">
+            <span class="statTitle1">No of clients</span>
+            <span class="statValue1">{{ stat.noOfClients }}</span>
+          </div>
+          <hr class="customLine">
+          <div class="stat2">
+            <span class="statTitle1">Amount</span>
+            <span class="statValue1">
+              <span class="active">
+                {{ stat.activeProducts }}
+              </span>
+              /
+              <span class="retired">
+                {{ stat.retiredProducts }}
+              </span>
+            </span>
+          </div>
+          <hr class="customLine">
+          <div class="stat2">
+            <span class="statTitle1">Value of Products</span>
+            <span class="statValue1">${{ stat.valueOfProducts | number:'1.2-2' }}</span>
+          </div>
+          <hr class="customLine">
+          <div class="stat2">
+            <span class="statTitle1">Overall Rating</span>
+            <span class="statValue1">{{ stat.overallRating | number:'1.2-2' }}</span>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="selected == 'product'">
+        <div class="imageContainer">
+          <div class="arrow">
+            <img src="assets/img/icon-left-arrow-2.png" width="25px" height="25px" role="button"
+                 (click)="plusSlides(-1)"
+                 *ngIf="product.images.length > 1">
+          </div>
+          <div class="imageBackground">
+            <ng-container *ngFor="let image of product.images; let i = index">
+              <div class="mySlides" [hidden]="slideIndex !== i + 1">
+                <div class="slideNumber">{{ i + 1 }} / {{ product.images.length }}</div>
+                <img id="{{product.id}}product{{image}}" src="{{image}}" class="image"/>
+              </div>
+            </ng-container>
+          </div>
+          <div class="arrow">
+            <img src="assets/img/icon-right-arrow-2.png" width="25px" height="25px" role="button"
+                 (click)="plusSlides(1)"
+                 *ngIf="product.images.length > 1">
+          </div>
+        </div>
+        <div class="productMain">
+          <div class="productTitle" *ngIf="product.suspended == null">
+            <input type="text" class="inp2" id="titleValue" value="{{ product.title }}">
+          </div>
+          <div class="productTitle" *ngIf="product.suspended != null">
+            {{ product.title }}
+          </div>
+          <div class="productCategory2">{{ product.category }}</div>
+        </div>
+        <textarea id="descriptionValue" class="inp2 descriptionInput" [(ngModel)]="product.description" *ngIf="product.suspended == null"></textarea>
+        <div style="width: 100%; float: left" *ngIf="product.suspended != null">{{ product.description }}</div>
+        <div class="infoContainer" *ngIf="product.suspended == null">
+          <span class="infoTitle">Price</span>
+          <br>
+          <input class="inp2 priceInput" value="{{ product.price }}" id="priceValue">
+        </div>
+        <div class="infoContainer" *ngIf="product.suspended != null">
+          <span class="infoTitle">Price</span>
+          <br>
+          <span class="infoValue">{{ product.price }}</span>
+        </div>
+        <div class="infoContainer" *ngIf="product.suspended != null && product.discountPrice != null">
+          <span class="infoTitle">Discount Price</span>
+          <br>
+          <span class="infoValue">{{ product.discountPrice }}</span>
+        </div>
+        <div class="infoContainer" *ngIf="product.suspended == null">
+          <span class="infoTitle">Discount Price</span>
+          <br>
+          <input class="inp2 priceInput" value="{{ product.discountPrice }}" id="discountPriceValue">
+        </div>
+        <div class="infoContainer">
+          <span class="infoTitle">Date & Time</span>
+          <br>
+          <div class="date">
+            {{ product.addTime | date:'d MMM, y' }}
+          </div>
+          <div class="time">
+            {{ product.addTime | date:'shortTime' }}
+          </div>
+        </div>
+        <div class="infoContainer">
+          <span class="infoTitle">No of clients</span>
+          <br>
+          <span class="infoValue">
+            {{ product.numOfClients }}
+          </span>
+        </div>
+        <div class="infoContainer">
+          <span class="infoTitle">Rating</span>
+          <br>
+          <span class="infoValue">
+            {{ product.rating | number:'1.2-2' }}, ({{ product.numOfComments }})</span>
+        </div>
+        <div class="infoContainer" *ngIf="product.suspended == null">
+          <span class="infoTitle">Value of Products</span>
+          <br>
+          <span class="infoValue">
+            {{ product.valOfStoredProducts | number: '1.2-2' }}
+          </span>
+        </div>
+        <div class="infoContainer" *ngIf="product.suspended != null">
+          <span class="infoTitle">Retired Date & Time</span>
+          <br>
+          <div class="date">
+            {{ product.suspended | date:'d MMM, y' }}
+          </div>
+          <div class="time">
+            {{ product.suspended | date:'shortTime' }}
+          </div>
+        </div>
+        <ng-container *ngIf="product.suspended == null">
+          <div class="infoContainer center">
+            <button class="btnn" (click)="addParameter()">Add Detail
+            </button>
+          </div>
+          <div class="infoContainer" *ngFor="let parameter of product.parameters; let i = index">
+            <div style="width: 100%; justify-content: space-between; display: flex; align-items: center">
+              <input type="text" class="infoTitle inp2 parameterKey" value="{{ parameter.key }}"
+                     [(ngModel)]="parameter.key" placeholder="Key">
+              <img src="assets/img/icon-x.png" width="25px" height="25px" role="button"
+                   (click)="deleteParameter(i)">
+            </div>
+            <input type="text" value="{{ parameter.value }}" class="infoValue inp2 parameterValue" placeholder="Value"
+                   [(ngModel)]="parameter.value">
+          </div>
+          <div class="infoContainer center">
+            <button class="btnn" (click)="addSizeProduct()">Add Size</button>
+          </div>
+          <div class="sizes" *ngIf="product.suspended == null">
+            <ng-container *ngFor="let size of product.sizes; let i = index">
+              <div class="sizeContainer2">
+                <input type="text" class="size2 inp3" value="{{ size.quantity }}"
+                       [(ngModel)]="size.quantity">
+                <div class="sizeValue">
+                  <input *ngIf="size.quantity == 0" class="size2 unavailableSize inp3" value="{{ size.sizeValue }}"
+                         [(ngModel)]="size.sizeValue">
+                  <input *ngIf="size.quantity != 0" class="size2 inp3" value="{{ size.sizeValue }}"
+                         [(ngModel)]="size.sizeValue">
+                </div>
+                <div class="sizeAddContainer">
+                  <img src="../../assets/img/icon-x.png" width="20px" height="20px" role="button"
+                       (click)="deleteSize2(i)">
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="product.suspended != null">
+          <div class="infoContainer" *ngFor="let parameter of product.parameters; let i = index">
+            <span class="infoTitle">{{ parameter.key }}</span>
+            <br>
+            <span class="infoValue">
+            {{ parameter.value }}
+          </span>
+          </div>
+        </ng-container>
+        <div class="buttons" *ngIf="product.suspended == null">
+          <button class="btn updateBtn" (click)="updateProduct(product.id)">
+            Update
+          </button>
+          <div class="input-group mb-3 inputFile">
+            <input type="file" multiple="multiple" class="form-control" id="images2" (change)="updateImages()">
+          </div>
+          <button class="btn retireBtn" (click)="removeProduct(product.id)">
+            Retire
+          </button>
+        </div>
+
+      </ng-container>
+
+      <ng-container *ngIf="selected == 'add'">
+        <div class="imageContainer">
+          <div class="arrow">
+            <img src="assets/img/icon-left-arrow-2.png" width="25px" height="25px" role="button"
+                 (click)="plusSlides(-1)"
+                 *ngIf="addProductImages.length != 0">
+          </div>
+          <div class="imageBackground">
+            <ng-container *ngFor="let image of addProductImages; let i = index">
+              <div class="mySlides" [hidden]="slideIndex !== i + 1">
+                <div class="slideNumber">{{ i + 1 }} / {{ addProductImages.length }}</div>
+                <img [src]="image" alt="Product Image" class="image"/>
+              </div>
+            </ng-container>
+          </div>
+          <div class="arrow">
+            <img src="assets/img/icon-right-arrow-2.png" width="25px" height="25px" role="button"
+                 (click)="plusSlides(1)"
+                 *ngIf="addProductImages.length != 0">
+          </div>
+        </div>
+        <div class="productMain">
+          <div class="productTitle">
+            <input type="text" class="inp2" id="title" placeholder="Title">
+          </div>
+        </div>
+        <textarea class="inp2 descriptionInput" id="description" placeholder="Description"></textarea>
+        <div class="infoContainer">
+          <span class="infoTitle">Price</span>
+          <br>
+          <input class="inp2" id="price">
+        </div>
+        <div class="infoContainer">
+          <span id="categoryText">Category</span>
+          <select class="form-select inp2" aria-label="Default select" id="subcategory" [formControl]="selectControl">
+            <option *ngFor="let category of categories" value="{{category.id}}">
+              {{ category.name }}
+            </option>
+          </select>
+        </div>
+        <div class="infoContainer center">
+          <button class="btnn" (click)="addParameter2()">Add Detail</button>
+        </div>
+
+        <div class="infoContainer" *ngFor="let parameter2 of productAdd.parameters; let i = index">
+          <div style="width: 100%; justify-content: space-between; display: flex; align-items: center">
+            <input type="text" class="infoTitle inp2 parameterKey" value="{{ parameter2.key }}"
+                   [(ngModel)]="parameter2.key" placeholder="Key">
+            <img src="assets/img/icon-x.png" width="25px" height="25px" style="cursor: pointer"
+                 (click)="deleteParameter2(i)">
+          </div>
+          <input type="text" value="{{ parameter2.value }}" class="infoValue inp2 parameterValue" placeholder="Value"
+                 [(ngModel)]="parameter2.value">
+        </div>
+        <div class="infoContainer center">
+          <button class="btnn" (click)="addSize()">Add Size</button>
+        </div>
+        <div class="sizes">
+          <ng-container *ngFor="let size of productAdd.sizes; let i = index">
+            <div class="sizeContainer2">
+              <input type="text" class="size2 inp3" value="{{ size.quantity }}" [(ngModel)]="size.quantity">
+              <div class="sizeValue">
+                <input *ngIf="size.quantity == 0" class="size2 unavailableSize inp3" value="{{ size.sizeValue }}"
+                       [(ngModel)]="size.sizeValue">
+                <input *ngIf="size.quantity != 0" class="size2 inp3" value="{{ size.sizeValue }}"
+                       [(ngModel)]="size.sizeValue">
+              </div>
+              <div class="sizeAddContainer">
+                <img src="../../assets/img/icon-x.png" width="20px" height="20px" role="button" (click)="deleteSize(i)">
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <div class="buttons">
+          <div class="input-group mb-3 inputFile">
+            <input type="file" multiple="multiple" class="form-control" id="images" (change)="uploadImages()">
+          </div>
+          <button class="btn addBtn" (click)="addProduct()">
+            Add Product
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

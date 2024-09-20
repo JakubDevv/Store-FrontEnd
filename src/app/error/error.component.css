@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+hr {
+  border: 1px solid #333;
+  margin: 20px 0;
+}
+
+#errorStatus {
+  font-size: 70px;
+  font-weight: 300;
+}
+
+#description {
+  font-size: 50px;
+  font-weight: 100;
+}
+
+#router {
+  font-size: 30px;
+  font-weight: 200;
+  cursor: pointer;
+  color: saddlebrown;
+}

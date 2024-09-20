@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Kawi:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,500;1,400;1,700&display=swap');
+
+.info {
+  width: 250px;
+  height: 100px;
+  margin: 0px 20px 0 20px;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 2px 8px 8px gray;
+  padding-left: 15px;
+}
+
+.product {
+  width: 350px;
+  height: 590px;
+  background-color: white;
+  box-shadow: 2px 8px 8px gray;
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.title {
+  padding: 10px 10px 0 10px;
+  font-weight: bolder;
+  font-size: 20px;
+  width: 350px;
+  height: 70px;
+  white-space: normal;
+  word-break: normal;
+  word-wrap: break-word;
+  float: left;
+}
+
+.description {
+  width: 350px;
+  height: 210px;
+  padding: 10px;
+  font-size: 17px;
+  white-space: normal;
+  word-wrap: break-word;
+  float: left;
+}
+
+.front {
+  float: left;
+}
+
+.back {
+  float: left;
+}
+
+.quantity {
+  width: 150px;
+  height: 60px;
+  float: left;
+  font-size: 26px;
+  padding-left: 10px;
+}
+
+.size {
+  width: 200px;
+  height: 60px;
+  float: left;
+  text-align: right;
+  padding-right: 10px;
+  font-size: 26px;
+}
+
+
+#info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 100px;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+#orderInfo {
+  width: 400px;
+  height: 100%;
+  float: left;
+  padding-left: 20px;
+}
+
+.item {
+  width: 100%;
+  height: 130px;
+  margin-bottom: 10px;
+}
+
+.image {
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#delivery {
+  width: 100%;
+  height: 150px;
+  padding-left: 45px;
+  float: left;
+  position: relative;
+}
+
+#status {
+  padding-left: 10px;
+  width: 50%;
+  height: 150px;
+  float: left;
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-left-color: gray;
+}
+
+.btnn {
+  margin-left: 5px;
+  background-color: white;
+  color: green;
+  border: 1px solid green;
+  border-radius: 10px;
+}
+
+.btnn:hover {
+  background-color: green;
+  color: white;
+}
+
+#infoo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 100px;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.main {
+  width: 1400px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 70px;
+}
+
+#header {
+  width: 100%;
+  height: 115px;
+  padding-left: 10px;
+}
+
+#orderId {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 35px;
+  float: left;
+}
+
+#orderPrice {
+  font-weight: 400;
+  font-size: 35px;
+  float: right;
+  font-family: 'Inter', sans-serif;
+}
+
+#orderInfoBar {
+  font-weight: 400;
+  font-size: 35px;
+  float: right;
+  font-family: 'Inter', sans-serif;
+}
+
+.completed {
+  color: #2d2dd7;
+}
+
+.sent {
+  color: green;
+}
+
+.addressHeader {
+  color: grey; font-size: 17px;
+}
+
+.username {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.phone {
+  font-size: 19px;
+}
+
+.name {
+  font-size: 18px;
+}
+
+.deliveryHeader {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 21px;
+}
+
+.inprogress {
+  color: red;
+}
+
+.fullWidth {
+  float: left;
+  width: 100%;
+}
+
+.amountOfProducts {
+  font-size: 21px;
+  font-weight: 350;
+  float: right;
+  color: grey;
+}
+
+#sendTime {
+  color: black;
+  font-size: 21px;
+  font-weight: 350;
+}
+
+.actualStatus {
+  font-family: 'Sometype Mono', monospace;
+}
+
+#orderDate {
+  color: grey;
+  font-size: 20px;
+}
+
+.companyBar {
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+  padding-left: 50px;
+  font-size: 30px;
+}
+
+.itemTitle {
+  font-size: 25px;
+  float: left;
+  font-family: 'Noto Sans Kawi', sans-serif;
+}
+
+.itemPrice {
+  font-size: 25px;
+  float: right;
+  margin-right: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.itemBackground {
+  height: 110px;
+  width: 110px;
+  margin: 10px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  float: left;
+  position: relative;
+}
+
+.companyStatus {
+  font-size: 17px;
+}
+
+.itemData {
+  height: 130px;
+  width: 100%;
+  padding-left: 140px;
+}
+
+.itemSize {
+  color: black;
+  margin-right: 3px;
+  font-size: 20px;
+}
+
+.qty {
+  font-size: 16px;
+  float: right;
+  margin-right: 20px;
+}
+
+.parameter {
+  font-size: 16px;
+}

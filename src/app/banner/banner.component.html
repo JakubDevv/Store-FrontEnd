@@ -1,0 +1,99 @@
+<div id="header">
+  <img src="../../assets/img/Logo.jpeg" id="logo" routerLink="/">
+  <div id="navbar">
+    <div id="navbar2">
+        Shop
+        <div id="header2">
+          <div id="inside">
+            <div id="inside2">
+              <ng-container *ngIf="!querying">
+                <ng-container *ngFor="let category of categories">
+                  <div class="mainCategory">{{ category.name }}</div>
+                  <ng-container *ngFor="let subCategory of category.subCategory">
+                    <div class="category" (click)="goToCategoryPage(subCategory.name)" routerLink="/products/{{subCategory.name}}" routerLinkActive="active">{{ subCategory.name }}</div>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="querying">
+                <img src="../../assets/img/icon-loupe.png" width="35px" height="35px" role="button" (click)="searchForProductsButton()">
+                <input type="text" placeholder="Search" [(ngModel)]="searchInput" (keyup.enter)="searchForProductsButton()" id="searchBar">
+                <img src="../../assets/img/icon-x.png" width="45px" height="45px" class="toRight" (click)="search()">
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      <a class="tab wider" routerLink="/new" routerLinkActive="active3">New</a>
+      <a class="tab" routerLink="/discounted" routerLinkActive="active3">Sale</a>
+      <a class="tab" role="button" (click)="showCart = !showCart">
+        Bag<span *ngIf="quantity > 0">({{quantity}})</span>
+      </a>
+      <ng-container *ngIf="roles.indexOf('client') !== -1">
+        <div class="lineSeparator"></div>
+        <a class="tab" routerLink="/transactions" routerLinkActive="active3">Transactions</a>
+        <a class="tab" routerLink="/orders" routerLinkActive="active3">Orders</a>
+      </ng-container>
+      <ng-container *ngIf="roles.indexOf('client') !== -1 && roles.indexOf('company') !== -1">
+        <div class="lineSeparator"></div>
+        <a class="tab companyName">{{ companyName }}</a>
+        <a class="tab" routerLink="/companyOrders" routerLinkActive="active3">Orders</a>
+        <a class="tab" routerLink="/overview" routerLinkActive="active3">Overview</a>
+        <a class="tab" routerLink="/company/products" routerLinkActive="active3">Products</a>
+      </ng-container>
+      <ng-container *ngIf="roles.indexOf('admin') !== -1">
+        <div class="lineSeparator"></div>
+        <a class="tab" routerLink="/admin/users" routerLinkActive="active3">Users</a>
+        <a class="tab" routerLink="/admin/products" routerLinkActive="active3">Products</a>
+        <a class="tab" routerLink="/admin/orders" routerLinkActive="active3">Orders</a>
+        <a class="tab" routerLink="/admin/categories" routerLinkActive="active3">Categories</a>
+        <a class="tab" routerLink="/admin/companies" routerLinkActive="active3">Companies</a>
+      </ng-container>
+    </div>
+  </div>
+  <div id="end">
+    <span class="searchButton" (click)="search()">SEARCH</span>
+    <span class="btnn" *ngIf="!isAuthenticated" routerLink="/login">Login</span>
+    <span class="btnn" *ngIf="isAuthenticated" (click)="logout()">Logout</span>
+  </div>
+</div>
+<div class="bagContainer" [ngClass]="{ opened: showCart }">
+  <div id="cartHeader">
+    <div id="cartTitle">
+      SHOPPING BAG
+    </div>
+      <img src="../../assets/img/icon-x.png" id="closeCartButton" (click)="showCart = false">
+  </div>
+  <div id="productsContainer">
+      <div class="productCard" *ngFor="let product of cart">
+        <div class="backgroundImage" (click)="goToProduct(product.id)">
+          <img [src]="product.photo" class="image">
+        </div>
+        <div class="productInfo">
+            {{ product.name }}
+          <div class="productSize">{{ product.size }}</div>
+          <hr class="customLine1">
+          {{ product.quantity * product.price | number : '1.2-2' }} PLN
+          <hr class="customLine2">
+          <div class="top15">
+            <input type="button" class="changeQuantityButton" value="-" (click)="delQuantity(product.sizeId)">
+            <div class="itemQuantityContainer center">
+              {{ product.quantity }}
+            </div>
+            <input type="button" class="changeQuantityButton" value="+" (click)="addQuantity(product.sizeId)">
+          </div>
+        </div>
+      </div>
+  </div>
+    <div id="summary">
+      <div id="total">
+        TOTAL
+      </div>
+      <div id="fullPrice">
+        {{ price | number: '1.2-2' }} PLN
+      </div>
+    </div>
+  <div id="buttonsContainer">
+    <input type="button" class="button1" value="Continue shopping" (click)="showCart = false">
+    <input type="button" class="button2" value="Checkout" routerLink="/cart" *ngIf="roles.indexOf('client') !== -1">
+    <input type="button" class="button2" value="Sign in" routerLink="/login" *ngIf="roles.indexOf('admin') === -1 && roles.indexOf('client') === -1">
+  </div>
+</div>

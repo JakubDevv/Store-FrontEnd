@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,500;1,400;1,700&display=swap');
+
+.filter-container {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.filter-container.opened {
+  max-height: 500px;
+}
+
+#filtersContainer {
+  width: 290px;
+  float: left;
+  border-radius: 20px;
+  margin: 0 10px 0 10px;
+  padding: 0 0 20px 20px;
+  position: sticky;
+  user-select: none;
+}
+
+.filter {
+  padding-left: 20px;
+  width: 200px;
+  display: inline;
+}
+
+.filter2 {
+  transition: height 2s;
+}
+
+.productCard {
+  width: 335px;
+  height: 484px;
+  float: left;
+  margin: 13px;
+  cursor: pointer;
+}
+
+.image {
+  max-width: 70%;
+  max-height: 70%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.productTitle {
+  font-family: 'Roboto Slab', serif;
+}
+
+.discountPrice {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.price {
+  font-weight: 300;
+}
+
+.filterValue {
+  font-size: 16px;
+  padding-left: 5px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.size {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.unavailable {
+  color: grey;
+  font-weight: 300;
+}
+
+.productSizes {
+  display: none;
+}
+
+.productCard:hover .productSizes {
+  display: block;
+}
+
+.productCard .productSizes {
+  display: none;
+}
+
+#pagination {
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  bottom: 20px;
+  font-family: "Poppins", sans-serif;
+  flex-direction: column;
+  justify-content: center;
+  color: #2d4848;
+  line-height: 50px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#paginationBar {
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.paginationValue {
+  width: 40px;
+  height: 40px;
+  background-color: whitesmoke;
+  float: left;
+  line-height: 40px;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+}
+
+.active {
+  background-color: saddlebrown;
+  width: 25px;
+  height: 25px;
+  margin-top: 7px;
+  line-height: 25px;
+  color: white;
+}
+
+.paginationValue:hover {
+  color: #0fddaf;
+}
+
+.imageBackground {
+  width: 335px;
+  height: 410px;
+  background-color: whitesmoke;
+  position: relative;
+}
+
+.activePageBackground {
+  border: 1px solid black;
+  width: 25px;
+  height: 25px;
+  margin-top: 7px;
+  line-height: 25px;
+  color: black;
+  margin-left: 7px;
+}
+
+.leftArrow {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  font-weight: bolder;
+  color: black;
+}
+
+.rightArrow {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-weight: bolder;
+  color: black;
+}
+
+.paginationDots {
+  font-size: 30px;
+}
+
+.productData {
+  height: 74px;
+  width: 335px;
+  background-color: white;
+}
+
+.products {
+  width: 1088px;
+  height: 1600px;
+  float: left;
+  position: relative;
+}
+
+.priceHeader {
+  display: inline;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+}
+
+.plus {
+  float: right;
+  font-size: 20px;
+}
+
+.input {
+  text-align: center;
+  width: 50px;
+}
+
+#main {
+  width: 1400px;
+  height: 1600px;
+  margin: 70px auto 0 auto;
+}
+
+#sorting {
+  width: 110px;
+  border-radius: 10px;
+  margin-right: 20px;
+  height: 35px;
+  font-weight: 300;
+  user-select: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+#sortingContainer {
+  padding-left: 30px;
+}
+
+#leftBar {
+  width: 310px;
+  height: 1600px;
+  float: left;
+}
+
+.customLine {
+  margin-top: 4px;
+}
+
+.filterKey {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+}
+
+input[type="checkbox"] {
+  height: 15px;
+  width: 15px;
+}
+
+.button2 {
+  width: calc(50% - 10px);
+  height: 45px;
+  background-color: black;
+  color: white;
+  border: none;
+  font-family: 'Sometype Mono', monospace;
+  font-size: 15px;
+}
+
+.button1 {
+  width: calc(50% - 10px);
+  height: 45px;
+  margin-right: 15px;
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  font-family: 'Sometype Mono', monospace;
+  font-size: 15px;
+}

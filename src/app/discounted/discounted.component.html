@@ -1,0 +1,71 @@
+<app-banner></app-banner>
+<div id="main">
+  <ng-container *ngFor="let product of products">
+    <div class="productCard" (click)="goToProduct(product.id)" (mouseenter)="showSecondImage(product)" (mouseleave)="showFirstImage(product)">
+      <div class="productImageBackground">
+        <div class="productLabelValue">
+          {{ product.discountPercentage }} %
+        </div>
+        <div class="productLabel1"></div>
+        <div class="productLabel2"></div>
+        <img class="image" id="{{product.id}}">
+      </div>
+      <div class="productData">
+        <div class="productTitle">
+          {{ product.title }}
+        </div>
+        <span class="discountPrice" *ngIf="product.discountPrice!=null">
+          {{ product.discountPrice | number : '1.2-2' }} PLN
+        </span>
+        <span class="price" *ngIf="product.discountPrice==null">
+          {{ product.price | number : '1.2-2' }} PLN
+        </span>
+        <div class="sizes">
+          <ng-container *ngFor="let size of product.sizeList">
+            <span class="size" [ngClass]="{'unavailable': size.quantity == 0}">{{ size.sizeValue }} </span>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <div id="pagination">
+    <div id="paginationBar">
+      <div class="paginationValue leftArrow" (click)="goToNextPage(pageNumber - 1)"><
+      </div>
+      <ng-container *ngIf="pageNumber > 3">
+        <div class="paginationValue" (click)="goToNextPage(1)">1</div>
+        <div class="paginationValue paginationDots">...</div>
+        <div class="paginationValue" (click)="goToNextPage(pageNumber - 1)">{{ pageNumber - 1 }}</div>
+      </ng-container>
+      <ng-container *ngIf="pageNumber == 2">
+        <div class="paginationValue" (click)="goToNextPage(pageNumber - 1)">{{ pageNumber - 1 }}</div>
+      </ng-container>
+      <ng-container *ngIf="pageNumber == 3">
+        <div class="paginationValue" (click)="goToNextPage(pageNumber - 2)">{{ pageNumber - 2 }}</div>
+        <div class="paginationValue" (click)="goToNextPage(pageNumber - 1)">{{ pageNumber - 1 }}</div>
+      </ng-container>
+      <div class="paginationValue">
+        <div class="activePageBackground">
+          {{ pageNumber }}
+        </div>
+      </div>
+      <ng-container *ngIf="pageNumber+1 == totalPages">
+        <div class="paginationValue" (click)="goToNextPage(pageNumber + 1)">{{ pageNumber + 1 }}</div>
+      </ng-container>
+      <ng-container *ngIf="pageNumber+2 == totalPages">
+        <div class="paginationValue" (click)="goToNextPage(pageNumber + 1)">{{ pageNumber + 1 }}</div>
+        <div class="paginationValue" (click)="goToNextPage(pageNumber + 2)">{{ pageNumber + 2 }}</div>
+      </ng-container>
+      <ng-container
+        *ngIf="pageNumber <= totalPages+2 && pageNumber+2 != totalPages && pageNumber+1 != totalPages && pageNumber != totalPages">
+        <div class="paginationValue" (click)="goToNextPage(pageNumber + 1)">{{ pageNumber + 1 }}</div>
+        <div class="paginationValue paginationDots">...</div>
+        <div class="paginationValue" (click)="goToNextPage(totalPages)">{{ totalPages }}</div>
+      </ng-container>
+      <div class="paginationValue rightArrow" (click)="goToNextPage(pageNumber + 1)">>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+

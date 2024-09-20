@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,500;1,400;1,700&display=swap');
+
+#container {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 15px;
+  color: #8d9db6;
+}
+
+#footer {
+  display: block;
+  float: left;
+  width: 100%;
+}
+
+#footerHeader {
+  border-top-color: rgb(245, 245, 245);
+  border-top-width: 2px;
+  border-top-style: solid;
+  border-bottom-color: rgb(245, 245, 245);
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-family: 'Sometype Mono', monospace;
+}

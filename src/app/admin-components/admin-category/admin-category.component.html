@@ -1,0 +1,192 @@
+<app-banner></app-banner>
+<div id="main">
+  <div id="header">
+    Categories list
+  </div>
+  <div id="statsBar">
+    <div class="stat">
+      <div class="statTitle">
+        Categories
+      </div>
+      <div class="chart center">
+        <canvas id="productsByCategory" #productsByCategory></canvas>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="statTitle">
+        Products
+      </div>
+      <div class="chart center">
+        <canvas id="productsBySubCategory" #productsBySubCategory></canvas>
+      </div>
+    </div>
+    <div class="stat">
+      <div class="statTitle">
+        Sales
+      </div>
+      <div class="chart center">
+        <canvas id="salesBySubCategory" #salesBySubCategory></canvas>
+      </div>
+    </div>
+  </div>
+  <div id="nav">
+    <div>
+      <div class="tab">
+        All Categories
+      </div>
+    </div>
+    <label>
+      <input type="text" class="filterInput">
+      <img src="../../../assets/img/icon-loupe.png" height="30px" width="30px" role="button">
+    </label>
+  </div>
+  <div class="categoryTableHeader">
+    <div class="tableHeaderColumn checkboxContainer">
+      <input type="checkbox">
+    </div>
+    <div class="tableHeaderColumn idColumn">
+      Category ID
+    </div>
+    <div class="tableHeaderColumn nameColumn">
+      Name
+    </div>
+    <div class="tableHeaderColumn productsColumn">
+      Products
+    </div>
+    <div class="tableHeaderColumn salesColumn">
+      Sales
+    </div>
+    <div class="tableHeaderColumn subCategoryColumn">
+      SubCategories
+    </div>
+    <div class="tableHeaderColumn statusColumn">
+      Status
+    </div>
+  </div>
+  <ng-container *ngFor="let mainCategory of categories">
+    <div class="categoryTableRow" (click)="showFilters(mainCategory.name)">
+      <div class="tableColumn checkboxContainer">
+        <input type="checkbox">
+      </div>
+      <div class="tableColumn idColumn">
+        {{ mainCategory.id }}
+      </div>
+      <div class="tableColumn nameColumn">
+        {{ mainCategory.name }}
+      </div>
+      <div class="tableColumn productsColumn">
+        {{ mainCategory.products }}
+      </div>
+      <div class="tableColumn salesColumn">
+        {{ mainCategory.sales }}
+      </div>
+      <div class="tableColumn subCategoryColumn">
+        {{ mainCategory.subCategories.length }}
+      </div>
+      <div class="tableColumn statusColumn" (mouseenter)="deleteCategory2(mainCategory.id)" (mouseleave)="showNormal(mainCategory.id)" (click)="deleteCategory(mainCategory.id)">
+        <span class="active1" *ngIf="mainCategory.deleted == null">
+          Active
+        </span>
+        <span class="delete1" *ngIf="mainCategory.deleted != null && mainCategory.deleted != datePlaceholder">
+          Deleted
+        </span>
+        <span class="delete1" *ngIf="mainCategory.deleted == datePlaceholder">
+          Delete
+        </span>
+      </div>
+    </div>
+    <div class="filter-container" [ngClass]="{ opened: openedFilters.indexOf(mainCategory.name) !== -1 }">
+      <div class="subCategoryTableHeader">
+        <div class="tableHeaderColumn idColumn">
+          Subcategory ID
+        </div>
+        <div class="tableHeaderColumn nameColumn">
+          Name
+        </div>
+        <div class="tableHeaderColumn productsColumn">
+          Products
+        </div>
+        <div class="tableHeaderColumn salesColumn">
+          Sales
+        </div>
+        <div class="tableHeaderColumn filtersColumn">
+          Filters
+        </div>
+        <div class="tableHeaderColumn statusColumn">
+          Status
+        </div>
+      </div>
+
+      <ng-container *ngFor="let subCategory of mainCategory.subCategories">
+        <div class="subCategoryTableRow" (click)="showFilters(subCategory.name)">
+          <div class="tableColumn idColumn">
+            {{ subCategory.id }}
+          </div>
+          <div class="tableColumn nameColumn">
+            {{ subCategory.name }}
+          </div>
+          <div class="tableColumn productsColumn">
+            {{ subCategory.products }}
+          </div>
+          <div class="tableColumn salesColumn">
+            {{ subCategory.sales }}
+          </div>
+          <div class="tableColumn filtersColumn">
+            {{ subCategory.filters.length }}
+          </div>
+          <div class="tableColumn statusColumn" (mouseenter)="deleteCategory3(subCategory.id)" (mouseleave)="showNormal3(subCategory.id)" (click)="deleteSubCategory(subCategory.id)">
+            <span class="active1" *ngIf="subCategory.deleted == null">
+              Active
+            </span>
+            <span class="delete1" *ngIf="subCategory.deleted != null && subCategory.deleted != datePlaceholder">
+              Deleted
+            </span>
+            <span class="delete1" *ngIf="subCategory.deleted == datePlaceholder">
+              Delete
+            </span>
+          </div>
+        </div>
+        <div class="filter-container" [ngClass]="{ opened: openedFilters.indexOf(subCategory.name) !== -1 }">
+          <div class="filterHeader">
+            <div class="filterHeaderKey">
+              Key
+            </div>
+            <div class="filterHeaderValues">
+              Values
+            </div>
+          </div>
+          <div class="filterRow" *ngFor="let filter of subCategory.filters">
+            <div class="filterKey">
+              <div>
+                {{ filter.key }}
+              </div>
+              <div>
+                <img src="../../../assets/img/icon-x.png" width="30px" height="30px" role="button" (click)="deleteFilter(filter.id, subCategory.id)">
+              </div>
+            </div>
+            <div class="filterValuesRow" *ngFor="let value of filter.values">
+              {{ value.value }}
+              <img src="../../../assets/img/icon-x.png" width="30px" height="30px" role="button" (click)="deleteFilterValue(value.id, filter.id)">
+            </div>
+            <div class="addFilterValue">
+              <input type="text" class="inp filterValueInput" placeholder="Value" id="filterValue{{filter.id}}">
+              <img src="../../../assets/img/icon-plus-math.png" width="30px" height="30px" role="button" (click)="createFilterValue(filter.id)">
+            </div>
+          </div>
+          <div class="createFilter">
+            <input type="text" class="inp filterKeyInput" id="filter{{subCategory.id}}" placeholder="Key">
+            <img src="../../../assets/img/icon-plus-math.png" width="30px" height="30px" role="button" (click)="createFilter(subCategory.id)">
+          </div>
+        </div>
+      </ng-container>
+      <div class="subCategoryTableRow inputContainer" *ngIf="mainCategory.deleted == datePlaceholder || mainCategory.deleted == null">
+        <input type="text" placeholder="Name" class="subCategoryInput" id="subCategory{{mainCategory.id}}">
+        <img src="../../../assets/img/icon-plus-math.png" width="40px" height="40px" role="button" (click)="createSubCategory(mainCategory.id)">
+      </div>
+    </div>
+  </ng-container>
+  <div class="categoryTableRow inputContainer">
+    <input type="text" placeholder="Name" class="categoryInput" id="categoryName2">
+    <img src="../../../assets/img/icon-plus-math.png" width="40px" height="40px" role="button" (click)="createCategory()">
+  </div>
+</div>

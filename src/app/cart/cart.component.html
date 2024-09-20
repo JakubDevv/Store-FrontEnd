@@ -1,0 +1,89 @@
+<app-banner></app-banner>
+<div id="main2">
+  <div id="main">
+    <div id="leftRow">
+      <div id="products">
+        <div class="cartHeader">
+          Cart
+          <div [ngClass]="alertClasses[0]">
+            <span class="icon center"><img src="assets/img/icon-done.png" width="35px" height="35px"></span>
+            <span class="msg">The transaction was successful</span>
+            <span class="close-btn" (click)="closeWarning(0)">
+              <img src="assets/img/icon-x.png" width="50px" height="50px">
+            </span>
+          </div>
+          <div [ngClass]="alertClasses[1]">
+            <span class="icon center"><img src="assets/img/icon-error2.png" width="35px" height="35px"></span>
+            <span class="msg">You don't have enough money</span>
+            <span class="close-btn" (click)="closeWarning(1)">
+              <img src="assets/img/icon-x.png" width="50px" height="50px">
+            </span>
+          </div>
+          <div [ngClass]="alertClasses[2]">
+            <span class="icon center"><img src="../../assets/img/icon-error2.png" width="35px" height="35px"></span>
+            <span class="msg">The cart has been updated</span>
+            <span class="close-btn" (click)="closeWarning(2)">
+              <img src="assets/img/icon-x.png" width="50px" height="50px">
+            </span>
+          </div>
+        </div>
+        <ng-container *ngFor="let product of cart">
+          <div class="product">
+            <div class="productImage">
+              <img [src]="product.photo" class="image" (click)="goToProduct(product.id)"/>
+            </div>
+            <div class="productTitle">
+              {{ product.name }}
+            </div>
+            <div class="productSize">
+              {{ product.size }}
+            </div>
+            <hr class="line">
+            <div class="productPriceContainer">
+              <div class="productSummedPrice">{{ product.price * product.quantity | number: '1.2-2' }} PLN</div>
+              <div class="productPrice">{{ product.price | number: '1.2-2' }}</div>
+            </div>
+            <hr class="line">
+            <div class="productQuantityChangeBar">
+              <input type="button" class="btn2" value="-" (click)="delQuantity(product.sizeId)">
+              <div class="productQuantity center">
+                {{ product.quantity }}
+              </div>
+              <input type="button" class="btn2" value="+" (click)="addQuantity(product.sizeId)">
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div id="rightRow">
+      <div class="cartHeader">
+        Checkout
+      </div>
+      <div class="asd">
+        <img src="assets/img/icon-location.png" width="20px" height="20px" class="mrg-r-5">
+        Shipping Information
+      </div>
+      <input type="text" class="inp" placeholder="COUNTRY" [(ngModel)]="country">
+      <input type="text" class="inp" placeholder="CITY" [(ngModel)]="city">
+      <input type="text" class="inp" placeholder="ZIP CODE" [(ngModel)]="zipcode">
+      <input type="text" class="inp streetInput" placeholder="STREET" [(ngModel)]="street">
+      <input type="text" class="inp apartmentNumberInput" placeholder="APARTMENT NUMBER" [(ngModel)]="apartmentnumber">
+      <input type="text" class="inp" placeholder="PHONE" [(ngModel)]="phone">
+      <div class="asd">
+        <img src="assets/img/icon-bag.png" width="20px" height="20px" class="mrg-r-5">
+        Order Summary
+      </div>
+      <div>
+        <div class="summary">
+          <span>Products</span>
+          <span>{{ quantityVal }}</span>
+        </div>
+        <div class="summary">
+          <span>Total</span>
+          <span>{{ fullPrice | number: '1.2-2' }} $</span>
+        </div>
+      </div>
+      <input type="button" class="btnnn" value="Order Now" (click)="proceedOrder()">
+    </div>
+  </div>
+</div>

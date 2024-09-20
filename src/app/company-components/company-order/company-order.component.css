@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Kawi:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,500;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+.urbanist-regular {
+  font-family: "Urbanist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.info {
+  width: 250px;
+  height: 100px;
+  margin: 0px 20px 0 20px;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 2px 8px 8px gray;
+  padding-left: 15px;
+}
+
+.product {
+  width: 350px;
+  height: 590px;
+  background-color: white;
+  box-shadow: 2px 8px 8px gray;
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.title {
+  padding: 10px 10px 0 10px;
+  font-weight: bolder;
+  font-size: 20px;
+  width: 350px;
+  height: 70px;
+  white-space: normal;
+  word-break: normal;
+  word-wrap: break-word;
+  float: left;
+}
+
+.description {
+  width: 350px;
+  height: 210px;
+  padding: 10px;
+  font-size: 17px;
+  white-space: normal;
+  word-wrap: break-word;
+  float: left;
+}
+
+.front {
+  float: left;
+}
+
+.back {
+  float: left;
+}
+
+.quantity {
+  width: 150px;
+  height: 60px;
+  float: left;
+  font-size: 26px;
+  padding-left: 10px;
+}
+
+#info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*line-height: 86%;*/
+  width: 100%;
+  height: 100%;
+  font-size: 100px;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+#orderInfo {
+  width: 400px;
+  height: 100%;
+  float: left;
+  padding-left: 20px;
+}
+
+.item {
+  width: 100%;
+  height: 130px;
+  margin-bottom: 10px;
+}
+
+.image {
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#delivery {
+  width: 50%;
+  height: 150px;
+  padding-left: 30px;
+  margin-bottom: 30px;
+  float: left;
+}
+
+#status {
+  padding-left: 10px;
+  margin-bottom: 30px;
+  width: 50%;
+  height: 150px;
+  float: left;
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-left-color: gray;
+}
+
+.btnn {
+  margin-left: 5px;
+  background-color: white;
+  color: green;
+  border: 1px solid green;
+  border-radius: 10px;
+}
+
+.btnn:hover {
+  background-color: green;
+  color: white;
+}
+
+#infoo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 100px;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+#main {
+  width: 1400px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 70px;
+}
+
+#mainData {
+  width: 100%;
+  height: 80px;
+  padding-left: 10px;
+}
+
+.fullWidth {
+  float: left;
+  width: 100%;
+  position: relative;
+}
+
+.orderStatus {
+  float: left;
+  width: 100%;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+#orderId {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 35px;
+  float: left;
+}
+
+#fullPrice {
+  font-weight: 400;
+  font-size: 35px;
+  float: right;
+  font-family: 'Inter', sans-serif;
+}
+
+#amountOfItems {
+  font-size: 21px;
+  font-weight: 350;
+  float: right;
+  color: grey;
+}
+
+.orderDate {
+  color: grey;
+  font-size: 20px;
+}
+
+.orderDateValue {
+  color: black;
+  font-size: 21px;
+  font-weight: 350;
+}
+
+.imageBackground {
+  height: 110px;
+  width: 110px;
+  margin: 10px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  float: left;
+  position: relative;
+}
+
+.itemData {
+  height: 130px;
+  width: 100%;
+  padding-left: 140px;
+}
+
+.itemTitle {
+  font-size: 25px;
+  float: left;
+  font-family: 'Noto Sans Kawi', sans-serif;
+}
+
+.itemPrice {
+  font-size: 25px;
+  float: right;
+  margin-right: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.parameterContainer {
+  width: 100%;
+  height: 30px;
+  float: left;
+  margin-top: 15px;
+}
+
+.parameterContainer2 {
+  float: left;
+}
+
+.parameter {
+  font-size: 16px;
+  color: grey;
+}
+
+.size {
+  margin-right: 3px;
+  font-size: 20px;
+}
+
+.itemQuantity {
+  font-size: 16px;
+  color: grey;
+  float: right;
+  margin-right: 20px;
+}
+
+.sendButton {
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 160px;
+  height: 27px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  font-family: 'Sometype Mono', monospace;
+}
+
+.sentDateValue {
+  color: black;
+  margin-left: 8px;
+  margin-top: 3px;
+}
+
+.sentDate {
+  color: #0b500b;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Sometype Mono', monospace;
+}
+
+#sendDateContainer {
+  color: grey;
+  font-size: 17px;
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.statusText {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 21px;
+}
+
+.deliveryHeader {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 21px;
+}
+
+.addressHeader {
+  color: grey;
+  font-size: 17px;
+  margin-left: 15px;
+}
+
+.addressData {
+  font-size: 19px;
+  margin-left: 15px;
+}
+
+.notoSans {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.itemHeader {
+  margin-top: 20px;
+  width: 100%;
+  height: 40px;
+  float: left;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.order-statuses {
+  height: 60px;
+  width: 700px;
+}
+
+.order-status-normal {
+  height: 60px;
+  width: 250px;
+  float: left;
+}
+
+.order-status-small {
+  height: 60px;
+  width: 200px;
+  float: left;
+}
+
+.order-date {
+  width: 100%;
+  height: 17px;
+  color: gray;
+  align-items: center;
+  display: flex;
+  font-size: 13px;
+}
+
+.custom-status-line-green {
+  background-color: #00780C;
+  height: 5px;
+  width: 210px;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.order-header {
+  width: 100%;
+  height: 25px;
+  color: black;
+  font-size: 18px;
+  align-items: center;
+  display: flex;
+}
+
+.order-status-value {
+  width: 100%;
+  height: 18px;
+  color: black;
+  font-size: 18px;
+  align-items: center;
+  display: flex;
+}
+
+.custom-dot {
+  height: 17px;
+  width: 17px;
+  border-radius: 10px;
+  background-color: #d6d6d6;
+}
+
+.send-order {
+  width: 100%;
+  height: 25px;
+  font-size: 18px;
+  align-items: center;
+  display: flex;
+  color: #2583EF;
+  cursor: pointer;
+}

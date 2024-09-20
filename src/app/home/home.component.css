@@ -1,0 +1,530 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@500&family=Nunito+Sans:wght@300&family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,600;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+
+.urbanist-regular {
+  font-family: "Urbanist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#main {
+  background-color: white;
+  padding-top: 70px;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.roboto-black {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 900;
+}
+
+.roboto-black2 {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+
+#bestDeals {
+  width: 1620px;
+  height: 470px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+#items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bestDealProduct {
+  width: 230px;
+  height: 350px;
+  padding: 10px;
+  float: left;
+  cursor: pointer;
+  margin: 12px;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+}
+
+.discountPrice {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 18px;
+}
+
+.price {
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.checked {
+  color: orange;
+}
+
+.single-item {
+  border-radius: 13px;
+  background-color: white;
+  width: 230px;
+  height: 300px;
+  padding: 10px;
+  margin: 20px;
+  float: left;
+  box-shadow: 3px 3px 25px 3px grey;
+  transition: 0.5s;
+}
+
+.single-item:hover {
+  box-shadow: 3px 10px 50px 3px grey;
+  margin-top: 10px;
+  transition: 1s;
+}
+
+@media (max-width: 768px) {
+  .single-item {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    clear: both;
+  }
+}
+
+.slideshow-container {
+  max-width: 1500px;
+  height: 800px;
+  margin-right: auto;
+  margin-left: auto;
+  border-top-right-radius: 40px;
+  border-top-left-radius: 40px;
+}
+
+
+.productTitle {
+  height: 57px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+legend {
+  display: block;
+  padding-left: 2px;
+  padding-right: 2px;
+  border: none;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: gray;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: whitesmoke;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: .4
+  }
+  to {
+    opacity: 1
+  }
+}
+
+.image {
+  max-height: 80%;
+  max-width: 80%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.btnnnnn {
+  width: 120px;
+  height: 40px;
+  margin-top: 15px;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 2px 2px 5px 3px grey;
+  font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.btnnnnn:hover {
+  background-color: whitesmoke;
+}
+
+.btnnnnn:active {
+  background-color: black;
+  color: white;
+  box-shadow: none;
+}
+
+.centerHorizontally {
+  display: flex;
+  justify-content: center;
+}
+
+#customerFavorites {
+  width: 100%;
+  height: 700px;
+  background-color: whitesmoke;
+  margin: 0 auto 30px auto; /*  todo do usuniecia  */
+  box-shadow: 20px 20px 30px 15px #d7d7d7;
+}
+
+#customerFavoritesHeader {
+  width: 100%;
+  text-align: center;
+  float: left;
+  margin-top: 30px;
+  height: 120px;
+}
+
+#customerFavoritesTitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 50px;
+}
+
+#customerFavoritesDescription {
+  font-family: 'Poppins', sans-serif;
+  color: grey;
+}
+
+#customerFavoritesProducts {
+  float: left;
+  margin-right: 20px;
+  width: 100%;
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 50px;
+}
+
+.customerFavoriteProduct {
+  width: 350px;
+  height: 460px;
+  float: left;
+  margin-right: 37px;
+  margin-left: 37px;
+  cursor: pointer;
+}
+
+.customerFavoriteImageBackground {
+  width: 300px;
+  height: 350px;
+  margin-left: 25px;
+  position: relative;
+}
+
+.customerFavoriteCategory {
+  height: 25px;
+  float: left;
+  text-align: center;
+  line-height: 25px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 300;
+}
+
+.customerFavoriteProductTitle {
+  width: 100%;
+  height: 50px;
+  float: left;
+  text-align: center;
+  line-height: 50px;
+  font-size: 22px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.customerFavoritePrice {
+  width: 100%;
+  height: 30px;
+  float: left;
+  text-align: center;
+  font-size: 17px;
+}
+
+#bestDealsTitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 33px;
+  width: 800px;
+  position: absolute;
+  left: 125px;
+}
+
+.curlyLineContainer {
+  position: absolute;
+  left: 119px;
+  top: 41px;
+}
+
+#bestDealsHeader {
+  width: 600px;
+  height: 70px;
+  float: left;
+  position: relative;
+}
+
+#bestDealsBar {
+  width: 100%;
+  height: 400px;
+  float: left;
+}
+
+.bestDealImageBackground {
+  height: 240px;
+  width: 210px;
+  position: relative;
+  background-color: whitesmoke;
+}
+
+.bestDealTitle {
+  height: 19px;
+  width: 100%;
+  margin-top: 10px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.bestDealDescription {
+  height: 35px;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.bestDealRating {
+  height: 20px;
+  width: 100%;
+  line-height: 12px;
+  justify-content: space-between;
+  display: flex;
+}
+
+.center-vertically {
+  align-items: center;
+  display: flex;
+}
+
+.stat-separator {
+  height: 50px;
+  border-right: 1px solid black;
+  width: 5px;
+}
+
+.stat-name {
+  height: 100px;
+  text-align: center;
+  color: grey;
+}
+
+.stat-value {
+  width: 100px;
+  height: 100px;
+  font-size: 75px;
+}
+
+.stat-container {
+  height: 100px;
+}
+
+.stat-bar {
+  width: 100%;
+  height: 140px;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.stat-bar-2 {
+  width: 1700px;
+  height: 140px;
+  justify-content: space-around;
+  color: black;
+}
+
+.categoryy {
+  height: 50px;
+  border-bottom: 1px solid #cccccc;
+  color: black;
+  cursor: pointer;
+  padding: 0 7px 0 7px;
+}
+
+.selected-category {
+  font-weight: 900;
+  border-bottom: 1px solid black;
+}
+
+.anton-regular {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.divs21 {
+  position: relative;
+  border-right: none;
+  padding-right: 5px;
+  border-bottom: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.divs21::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  width: 70px;
+  border-bottom: 1px solid red;
+  transition: width 2s linear;
+}
+
+.divs21::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 10px;
+  height: 22px;
+  border-right: 1px solid red;
+  transition: height 3s linear;
+}
+
+.divs21:hover::after {
+  width: 0;
+}
+
+.divs21:hover::before {
+  height: 0;
+}
+
+.custom-button {
+  border: 2px solid #4a4a4a;
+  border-radius: 20px;
+  width: 110px;
+  height: 43px;
+  padding: 0 9px 0 15px;
+  justify-content: space-between;
+  display: flex;
+  cursor: pointer;
+}
+
+.custom-product-button {
+  border-radius: 13px;
+  width: 25px;
+  height: 25px;
+  border: 1px solid black;
+  background-color: #dcff31;
+}
+
+.category-list {
+  width: 450px;
+  height: 50px;
+  display: flex;
+}
+
+.category-header {
+  width: 450px;
+  height: 150px;
+}
+
+.f-s-70 {
+  font-size: 70px;
+}
+
+.div-50 {
+  height: 100%;
+  width: 50%;
+  float: left;
+}
+
+.categories-container {
+  width: 900px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.product-data {
+  position: relative;
+  width: 100%;
+  height: 60px;
+}
+
+.top-product-button {
+  border-radius: 13px;
+  width: 25px;
+  height: 25px;
+  border: 1px solid black;
+  background-color: #dcff31;
+  position: absolute;
+  top: 20px;
+  right: 10px;
+}
+
+.width-100 {
+  width: 100%;
+}

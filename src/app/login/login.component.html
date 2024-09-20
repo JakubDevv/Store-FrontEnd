@@ -1,0 +1,33 @@
+<div [ngClass]="alert" class="urbanist-regular">
+  <div class="icon center"><img src="assets/img/icon-error3.png" width="45px" height="45px"></div>
+  <div class="msg center2">Incorrect login or password. Try again.</div>
+  <span class="close-btn" (click)="closeWarning()">
+  <img src="assets/img/icon-x.png" width="50px" height="50px">
+  </span>
+</div>
+<div id="main">
+  <form [formGroup]="form" (submit)="submit()">
+    <div class="header centerHorizontally">
+      <div class="header-title">Welcome to Store!</div>
+      <div class="header-sub-title">Sign in to your account</div>
+    </div>    <div class="inputContainer">
+      <label for="username" class="inputHeader">Username</label>
+      <input formControlName="username" class="input" type="text" id="username">
+    </div>
+    <div class="inputContainer">
+      <label for="password" class="inputHeader">Password</label>
+      <span class="resetPassword">Forgot password?</span>
+      <input formControlName="password" class="input hideText" type="text" id="password">
+    </div>
+    <button class="customButton urbanist-regular">
+      Sign in
+    </button>
+  </form>
+  <br>
+  <div class="centerHorizontally">
+    Not a member?
+    <span class="register" routerLink="/register">
+      Register new account
+    </span>
+  </div>
+</div>

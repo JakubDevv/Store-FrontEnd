@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+
+* {
+  font-family: "Urbanist", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.urbanist-regular {
+  font-family: "Urbanist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#main {
+  position: absolute;
+  width: 400px;
+  height: 330px;
+  top: calc(50% - 165px);
+  left: calc(50% - 200px);
+  font-family: 'Roboto', sans-serif;
+}
+
+#title {
+  text-align: center;
+}
+
+.inputContainer {
+  height: 80px;
+}
+
+.hideText {
+  -webkit-text-security: disc;
+}
+
+.input {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.inputHeader {
+  font-weight: 500;
+  padding-bottom: 5px;
+}
+
+.customButton {
+  color: white;
+  background-color: black;
+  line-height: 1.5rem;
+  width: 100%;
+  border-radius: 20px;
+  height: 40px;
+  font-weight: 500;
+}
+
+.centerHorizontally {
+  text-align: center;
+}
+
+.register {
+  color: rgb(79 70 229);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.resetPassword {
+  padding-bottom: 5px;
+  float: right;
+  color: rgb(79 70 229);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.alert {
+  background: #a2142e;
+  min-width: 420px;
+  position: fixed;
+  right: 0px;
+  top: 10px;
+  border-radius: 4px;
+  border-left: 8px solid red;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  margin-top: 40px;
+  font-size: 16px;
+  color: white;
+  align-items: center;
+  display: flex;
+  z-index: 9999;
+}
+
+.alert.show {
+  animation: show_slide 1s ease forwards;
+}
+
+.alert.showAlert {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.alert.hideAlert {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@keyframes show_slide {
+  0% {
+    transform: translateX(100%);
+  }
+  40% {
+    transform: translateX(-10%);
+  }
+  80% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-10px);
+  }
+}
+
+.alert.hide {
+  animation: hide_slide 1s ease forwards;
+}
+
+@keyframes hide_slide {
+  0% {
+    transform: translateX(-10px);
+  }
+  40% {
+    transform: translateX(0%);
+  }
+  80% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.icon {
+  width: 40px;
+  height: 50px;
+  float: left;
+  margin: 0;
+}
+
+.close-btn{
+  margin-right: 0;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.center2 {
+  justify-content: center;
+  display: flex;
+}
+
+.msg {
+  width: 300px;
+}
+
+.header-title {
+  width: 100%;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.header-sub-title {
+  width: 100%;
+  font-size: 15px;
+  color: gray;
+  margin-top: 10px;
+}

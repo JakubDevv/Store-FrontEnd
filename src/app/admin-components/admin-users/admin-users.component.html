@@ -1,0 +1,222 @@
+<app-banner></app-banner>
+<div id="main" class="urbanist-regular">
+  <div>
+    <ng-container *ngIf="!userSelect; else userSelected">
+    <div class="header urbanist-regular">
+    <span class="header-title">
+      Users <span class="header-value"> ({{ filteredUsers.length }})</span>
+    </span>
+      <div class="stats-list">
+        <div class="stat-container">
+          <span class="stat-header">New Users</span>
+          <br>
+          <div style="height: 50px; width: 100px">
+            <canvas id="usersChart" #usersChart></canvas>
+          </div>
+        </div>
+        <div class="custom-vertical-line">
+
+        </div>
+        <div class="stat-container">
+          <span class="stat-header">Active users</span>
+          <br>
+          <span class="stat-value">{{ bannedUsers }}</span>
+        </div>
+        <div class="custom-vertical-line">
+
+        </div>
+        <div class="stat-container">
+          <span class="stat-header">Retired users</span>
+          <br>
+          <span class="stat-value">{{ bannedUsers }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-list urbanist-regular">
+      <div class="cell">
+        <div class="cellTitle">
+          Search for order
+        </div>
+        <div class="cellValue">
+          <div class="lupe-container center">
+            <img src="assets/img/icon-loupe.png" width="30px" height="30px">
+          </div>
+          <input type="text" class="custom-input" placeholder="Search" [(ngModel)]="searchText">
+        </div>
+      </div>
+      <div class="cell">
+        <div class="cellTitle">
+          <label for="status">Status</label>
+        </div>
+        <div class="cellValue">
+          <select id="status" class="custom-select">
+            <option value="All" (click)="filterByStatus('ALL')">All</option>
+            <option value="Active" (click)="filterByStatus('ACTIVE')">Active</option>
+            <option value="Retired" (click)="filterByStatus('RETIRED')">Retired</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="cell">
+        <div class="cellTitle">
+          Balance
+          {{ minValue }} - {{ maxValue }}
+        </div>
+        <div class="cellValue slider-container">
+          <div class="slider">
+            <div class="progress" [ngStyle]="{'left.%': leftPercentage, 'right.%': rightPercentage}"></div>
+          </div>
+          <div class="range-input">
+            <input type="range" class="range-min" [value]="minValue" [min]="minRange" [max]="maxRange"
+                   (input)="updateMinRange($event)">
+            <input type="range" class="range-max" #rangeMax [value]="maxValue" min="0" max="1000"
+                   (input)="updateMaxRange($event)">
+          </div>
+        </div>
+      </div>
+      <div class="cell" style="width: 100px">
+        <div class="cellTitle">
+          Company
+        </div>
+        <div class="cellValue slider-container" style="padding-top: 8px">
+
+          <label class="switch">
+            <input type="checkbox" [(ngModel)]="company">
+            <span class="slider2 round"></span>
+          </label>
+
+        </div>
+      </div>
+      <div class="cell">
+        <div class="cellTitle">
+          Money turnover
+          {{ minValue2 }} - {{ maxValue2 }}
+        </div>
+        <div class="cellValue slider-container">
+          <div class="slider">
+            <div class="progress" [ngStyle]="{'left.%': leftPercentage2, 'right.%': rightPercentage2}"></div>
+          </div>
+          <div class="range-input">
+            <input type="range" class="range-min" [value]="minValue2" [min]="minRange2" [max]="maxRange2"
+                   (input)="updateMinRange2($event)">
+            <input type="range" class="range-max" #rangeMax2 [value]="maxValue2" min="0" max="1000"
+                   (input)="updateMaxRange2($event)">
+          </div>
+        </div>
+      </div>
+    </div>
+    </ng-container>
+    <ng-template #userSelected>
+      <div class="userContainer">
+        <div class="userPhotoContainer">
+          <img src="assets/img/default-profile-pic.png" id="profile" width="220px" height="220px">
+        </div>
+
+        <div class="userData">
+          <div class="userName">{{ user.firstName }} {{ user.lastName }}</div>
+          <div class="userName2">{{ user.userName }}</div>
+          <div class="userStatus">
+            <div class="userStatusTitle">
+              <span>Created</span><span *ngIf="user.banned != null" style="color: red">Banned</span>
+            </div>
+            <div class="userStatusDate">
+              <span>{{ user.created | date: 'longDate' }}</span><span *ngIf="user.banned != null">{{ user.banned | date: 'longDate' }}</span>
+              <span *ngIf="user.banned == null" style="color: red; cursor: pointer" (click)="blockUser(user.id)">Ban</span>
+            </div>
+            <div class="userStatusDate">
+              <span>{{ user.created | date: 'shortTime' }}</span>
+              <span *ngIf="user.banned != null">{{ user.banned | date: 'shortTime' }}</span>
+            </div>
+            <div class="userStatus3">
+              <img src="../../../assets/img/icon-tick-96.png" height="22px">
+              <div class="customLine"></div>
+              <img src="assets/img/icon-x-2.png" height="22px">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="userTable">
+          <div class="userTableHeader">
+            <div class="userTableRow userTableId">
+              Id
+            </div>
+            <div class="userTableRow userTableCreated">
+              Created
+            </div>
+            <div class="userTableRow userTablePrice">
+              Price
+            </div>
+            <div class="userTableRow userTableAddress">
+              Address
+            </div>
+            <div class="userTableRow userTableStatus">
+              Status
+            </div>
+          </div>
+            <ng-container *ngFor="let order of user.orders">
+              <div class="userTableColumn" (click)="viewOrder(order.id)">
+                <div class="userTableRow userTableId">
+                  {{ order.id }}
+                </div>
+                <div class="userTableRow userTableCreated">
+                  {{ order.created | date:'mediumDate' }}
+                </div>
+                <div class="userTableRow userTablePrice">
+                  {{ order.price | number:'1.2-2' }} PLN
+                </div>
+                <div class="userTableRow userTableAddress">
+                  {{ order.city }}, {{ order.street }}
+                </div>
+                <div class="userTableRow userTableStatus">
+                  <span *ngIf="order.status == 'IN_PROGRESS'"><img src="../../../assets/img/status-100.svg" height="10px"> 30%</span>
+                  <span *ngIf="order.status == 'SENT'"><img src="../../../assets/img/status-100.svg" height="10px"> 70%</span>
+                  <span *ngIf="order.status == 'COMPLETED'"><img src="../../../assets/img/status-100.svg" height="10px"> 100%</span>
+                </div>
+              </div>
+            </ng-container>
+        </div>
+        <img src="assets/img/icon-x.png" class="closeButton" (click)="closeUser()">
+      </div>
+    </ng-template>
+
+  </div>
+  <div class="table">
+    <div class="table-header">
+      <div class="id-column center">#</div>
+      <div class="date-column">Username</div>
+      <div class="price-column">Balance</div>
+      <div class="companies-column">Name</div>
+      <div class="status-column">Money Turnover</div>
+      <div class="address-column">Orders</div>
+      <div class="products-column">Created</div>
+      <div class="date-receipt-column">Company</div>
+    </div>
+    <ng-container *ngFor="let user of filteredUsers | search: searchText">
+      <div class="table-row" (click)="getUser(user.id)">
+        <div class="id-column center">{{ user.id }}</div>
+        <div class="date-column urbanist-regular">{{ user.username }}
+        </div>
+        <div class="price-column urbanist-regular">
+          ${{ user.balance | number:'1.2-2' }}
+        </div>
+        <div class="companies-column urbanist-regular">
+          {{ user.first_name }} {{ user.last_name }}
+        </div>
+        <div class="status-column">
+          ${{ user.moneyTurnover | number:'1.2-2' }}
+        </div>
+        <div class="address-column urbanist-regular">
+          {{ user.allOrders }}
+        </div>
+        <div class="products-column urbanist-regular">
+          {{ user.created | date:'mediumDate' }}
+        </div>
+        <div class="date-receipt-column urbanist-regular">
+          {{ user.company_name }}
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

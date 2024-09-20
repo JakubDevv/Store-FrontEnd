@@ -1,0 +1,136 @@
+<app-banner></app-banner>
+<div id="main" class="urbanist-regular">
+  <div class="header urbanist-regular">
+    <span class="header-title">
+      Companies <span class="header-value"> ({{companies.length}})</span>
+    </span>
+    <div class="stats-list">
+      <div class="stat-container">
+        <span class="stat-header">Banned</span>
+        <br>
+        <span class="stat-value">{{ bannedCompanies }}</span>
+      </div>
+      <div class="custom-vertical-line">
+
+      </div>
+      <div class="stat-container">
+        <span class="stat-header">New Companies</span>
+        <br>
+        <div style="height: 50px; width: 100px">
+          <canvas id="companiesChart" #companiesChart></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-list urbanist-regular">
+    <div class="cell">
+      <div class="cellTitle">
+        Search for company
+      </div>
+      <div class="cellValue">
+        <div class="lupe-container center">
+          <img src="assets/img/icon-loupe.png" width="30px" height="30px">
+        </div>
+        <input type="text" class="custom-input" placeholder="Search" [(ngModel)]="searchText">
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cellTitle">
+        Sales {{ minValue2 }} - {{ maxValue2 }}
+      </div>
+      <div class="cellValue slider-container">
+        <div class="slider">
+          <div class="progress" [ngStyle]="{'left.%': leftPercentage2, 'right.%': rightPercentage2}"></div>
+        </div>
+        <div class="range-input">
+          <input type="range" class="range-min" [value]="minValue2" [min]="minRange2" [max]="maxRange2" (input)="updateMinRange2($event)">
+          <input type="range" class="range-max" #rangeMax2 [value]="maxValue2" min="0" max="1000" (input)="updateMaxRange2($event)">
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cellTitle">
+        Money Turnover
+        {{ minValue }} - {{ maxValue }}
+      </div>
+      <div class="cellValue slider-container">
+        <div class="slider">
+          <div class="progress" [ngStyle]="{'left.%': leftPercentage, 'right.%': rightPercentage}"></div>
+        </div>
+        <div class="range-input">
+          <input type="range" class="range-min" [value]="minValue" [min]="minRange" [max]="maxRange" (input)="updateMinRange($event)">
+          <input type="range" class="range-max" #rangeMax [value]="maxValue" min="0" max="1000" (input)="updateMaxRange($event)">
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cellTitle">
+        <label for="products">Status</label>
+      </div>
+      <div class="cellValue">
+        <select id="products" class="custom-select">
+          <option value="all" (click)="filterByStatus('ALL')">All</option>
+          <option value="pending" (click)="filterByStatus('ACTIVE')">Active</option>
+          <option value="sent" (click)="filterByStatus('BANNED')">Banned</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="table">
+    <div class="table-header">
+      <div class="id-column center">#</div>
+      <div class="date-column">Name</div>
+      <div class="price-column">Created</div>
+      <div class="companies-column">Owner</div>
+      <div class="status-column">Sales</div>
+      <div class="status-column">Products</div>
+      <div class="address-column">Money Turnover</div>
+      <div class="products-column">Orders</div>
+      <div class="last-activity-column">Last Activity</div>
+      <div class="date-receipt-column">Banned</div>
+    </div>
+    <ng-container *ngFor="let company of filteredCompanies | search: searchText">
+      <div class="table-row">
+        <div class="id-column center">
+          {{ company.companyId }}
+        </div>
+        <div class="date-column urbanist-regular">
+          {{ company.companyName }}
+        </div>
+        <div class="price-column urbanist-regular">
+          {{ company.created | date:'mediumDate' }}
+        </div>
+        <div class="companies-column urbanist-regular">
+          {{ company.fullName }}
+        </div>
+        <div class="status-column">
+          {{ company.sales }}
+        </div>
+        <div class="status-column">
+          {{ company.products }}
+        </div>
+        <div class="address-column urbanist-regular">
+          {{ company.moneyTurnover | number:'1.2-2' }}
+        </div>
+        <div class="products-column urbanist-regular">
+          {{ company.inProgressOrders }} / {{ company.ordersCompleted }}
+        </div>
+        <div class="last-activity-column urbanist-regular">
+          {{ company.lastActivity | date:'mediumDate' }}
+        </div>
+        <div class="urbanist-regular date-receipt-column" (click)="banCompany(company.companyId)" (mouseenter)="deleteCategory3(company.companyId)" (mouseleave)="showNormal3(company.companyId)">
+          <span style="color: green" *ngIf="company.banned == null">
+                Active
+          </span>
+          <span style="color: red" *ngIf="company.banned != null && company.banned != datePlaceholder">
+                {{ company.banned | date:'mediumDate' }}
+          </span>
+          <span style="color: red; cursor: pointer" *ngIf="company.banned == datePlaceholder">
+                Ban
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,258 @@
+<app-banner></app-banner>
+<div id="main" class="urbanist-regular">
+  <ng-container *ngIf="productId == 0; else product">
+    <div class="header urbanist-regular">
+    <span class="header-title">
+      Products <span class="header-value"> ({{ products.length }})</span>
+    </span>
+      <div class="stats-list">
+        <div class="stat-container">
+          <span class="stat-header">New Products</span>
+          <br>
+          <div style="height: 50px; width: 100px">
+            <canvas id="productsChart" #productsChart></canvas>
+          </div>
+        </div>
+        <div class="custom-vertical-line">
+
+        </div>
+        <div class="stat-container">
+          <span class="stat-header">Active</span>
+          <br>
+          <span class="stat-value">{{ getActiveProducts }}</span>
+        </div>
+        <div class="custom-vertical-line">
+
+        </div>
+        <div class="stat-container">
+          <span class="stat-header">Retired</span>
+          <br>
+          <span class="stat-value">{{ getRetiredProducts }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="filter-list urbanist-regular">
+      <div class="cell">
+        <div class="cellTitle">
+          Search for order
+        </div>
+        <div class="cellValue">
+          <div class="lupe-container center">
+            <img src="assets/img/icon-loupe.png" width="30px" height="30px">
+          </div>
+          <input type="text" class="custom-input" placeholder="Search" [(ngModel)]="searchText">
+        </div>
+      </div>
+
+      <div class="cell">
+        <div class="cellTitle">
+          <label for="status">Status</label>
+        </div>
+        <div class="cellValue">
+          <select id="status" class="custom-select">
+            <option value="All" (click)="filterByStatus('ALL')">All</option>
+            <option value="Active" (click)="filterByStatus('ACTIVE')">Active</option>
+            <option value="Retired" (click)="filterByStatus('RETIRED')">Retired</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="cell">
+        <div class="cellTitle">
+          Price
+          {{ minValue }} - {{ maxValue }}
+        </div>
+        <div class="cellValue slider-container">
+          <div class="slider">
+            <div class="progress" [ngStyle]="{'left.%': leftPercentage, 'right.%': rightPercentage}"></div>
+          </div>
+          <div class="range-input">
+            <input type="range" class="range-min" [value]="minValue" [min]="minRange" [max]="maxRange"
+                   (input)="updateMinRange($event)">
+            <input type="range" class="range-max" #rangeMax [value]="maxValue" min="0" max="100"
+                   (input)="updateMaxRange($event)">
+          </div>
+        </div>
+      </div>
+
+      <div class="cell">
+        <div class="cellTitle">
+          <label for="category">Category</label>
+        </div>
+        <div class="cellValue">
+          <select id="category" class="custom-select">
+            <option value="all" (click)="filterByCategory('ALL')">All</option>
+            <ng-container *ngFor="let category of categories">
+              <option value="{{ category }}" class="urbanist-regular"
+                      (click)="filterByCategory(category)">{{ category }}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+
+      <div class="cell">
+        <div class="cellTitle">
+          <label for="company">Company</label>
+        </div>
+        <div class="cellValue">
+          <select id="company" class="custom-select">
+            <option value="all" (click)="filterByCompany('ALL')">All</option>
+            <ng-container *ngFor="let company of companies">
+              <option value="{{ company }}" class="urbanist-regular" (click)="filterByCompany(company)">{{ company }}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+
+      <div class="cell">
+        <div class="cellTitle">
+          Items
+          {{ minValue2 }} - {{ maxValue2 }}
+        </div>
+        <div class="cellValue slider-container">
+          <div class="slider">
+            <div class="progress" [ngStyle]="{'left.%': leftPercentage2, 'right.%': rightPercentage2}"></div>
+          </div>
+          <div class="range-input">
+            <input type="range" class="range-min" [value]="minValue2" [min]="minRange2" [max]="maxRange2"
+                   (input)="updateMinRange2($event)">
+            <input type="range" class="range-max" #rangeMax2 [value]="maxValue2" min="0" max="1"
+                   (input)="updateMaxRange2($event)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #product>
+    <div class="productContainer">
+      <div class="productImageContainer">
+        <img [id]="product2.id" class="image">
+      </div>
+
+      <div class="productData">
+        <div class="productTitle wrapText">{{ product2.title }}</div>
+        <div class="productDescription">{{ product2.description }}</div>
+        <div class="productTypes wrapText">{{ product2.types.join(' | ') }}</div>
+        <div class="productStatus1">
+
+          <div class="productStatus2">
+            <div class="statusTitle">
+              <span>Created</span><span *ngIf="product2.deleted != null" style="color: red">Banned</span>
+            </div>
+            <div class="statusTitle">
+              <span>{{ product2.addTime | date: 'longDate' }}</span>
+              <span *ngIf="product2.deleted != null">{{ product2.deleted | date: 'longDate' }}</span>
+              <span *ngIf="product2.deleted == null" style="color: red; cursor: pointer" (click)="retireProduct(product2.id)">Ban</span>
+            </div>
+            <div class="statusDate1">
+              <span>{{ product2.addTime | date: 'shortTime' }}</span>
+              <span *ngIf="product2.deleted != null">{{ product2.deleted | date: 'shortTime' }}</span>
+            </div>
+            <div class="statusDate2">
+              <img src="../../../assets/img/icon-tick-96.png" height="22px" style="float: left">
+              <div class="customLine"></div>
+              <img src="assets/img/icon-x-2.png" height="22px" style="float: left">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="productTable">
+        <div class="productTableHeader">
+          <div class="productTableRow productTableId">
+            Id
+          </div>
+          <div class="productTableRow productTableCreated">
+            Created
+          </div>
+          <div class="productTableRow productTablePrice">
+            Price
+          </div>
+          <div class="productTableRow productTableQuantity">
+            Quantity
+          </div>
+          <div class="productTableRow productTableSize">
+            Size
+          </div>
+          <div class="productTableRow productTableStatus">
+            Status
+          </div>
+        </div>
+        <ng-container *ngFor="let order of product2.orders">
+          <div class="productTableColumn" (click)="viewOrder(order.id)">
+            <div class="productTableRow productTableId">
+              {{ order.id }}
+            </div>
+            <div class="productTableRow productTableCreated">
+              {{ order.sendTime | date:'mediumDate' }}
+            </div>
+            <div class="productTableRow productTablePrice">
+              {{ order.price * order.quantity | number:'1.2-2' }} PLN
+            </div>
+            <div class="productTableRow productTableQuantity">
+              {{ order.quantity }}
+            </div>
+            <div class="productTableRow productTableSize">
+              {{ order.sizeValue }}
+            </div>
+            <div class="productTableRow productTableStatus">
+              <span *ngIf="order.status == 'IN_PROGRESS'"><img src="../../../assets/img/status-100.svg" height="10px"> 30%</span>
+              <span *ngIf="order.status == 'SENT'"><img src="../../../assets/img/status-100.svg" height="10px"> 70%</span>
+              <span *ngIf="order.status == 'COMPLETED'"><img src="../../../assets/img/status-100.svg" height="10px"> 100%</span>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+
+      <img src="assets/img/icon-x.png" class="closeButton" (click)="closeProduct()">
+    </div>
+  </ng-template>
+  <div class="table">
+    <div class="table-header">
+      <div class="header-column idColumn center">#</div>
+      <div class="header-column sendTimeColumn">Add Time</div>
+      <div class="header-column userNameColumn">Name</div>
+      <div class="header-column priceColumn">Actual Price</div>
+      <div class="header-column addressColumn">Sales</div>
+      <div class="header-column statusColumn">Total Revenue</div>
+      <div class="header-column itemsColumn">Category</div>
+      <div class="header-column companiesColumn">Company</div>
+      <div class="header-column updateColumn">Status</div>
+    </div>
+    <ng-container *ngFor="let product of filteredProducts | search: searchText">
+
+      <div class="table-row" (click)="showProduct(product.id)">
+        <div class="tableColumn idColumn center urbanist-regular">{{ product.id }}</div>
+        <div class="tableColumn sendTimeColumn urbanist-regular">
+          {{ product.addTime | date:'mediumDate' }}
+        </div>
+        <div class="tableColumn userNameColumn urbanist-regular">
+          {{ product.name }}
+        </div>
+        <div class="tableColumn priceColumn urbanist-regular">
+          {{ product.actualPrice | number:'1.2-2' }} $
+        </div>
+        <div class="tableColumn addressColumn wrapText">
+          {{ product.sales }}
+        </div>
+        <div class="tableColumn statusColumn">
+          {{ product.totalRevenue | number:'1.2-2' }} $
+        </div>
+        <div class="tableColumn itemsColumn urbanist-regular">
+          {{ product.subCategory }}
+        </div>
+        <div class="tableColumn companiesColumn wrapText urbanist-regular">
+          {{ product.companyName }}
+        </div>
+        <div class="tableColumn updateColumn urbanist-regular">
+          <span style="color: red" *ngIf="product.suspended">Retired</span>
+          <span style="color: green" *ngIf="!product.suspended">Active</span>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

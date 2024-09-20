@@ -1,0 +1,93 @@
+<app-banner></app-banner>
+<div id="main">
+  <div id="mainData">
+    <div class="fullWidth">
+      <div id="orderId">
+        Order ID: {{ order.id }}
+      </div>
+      <div id="fullPrice">
+        {{ price | number:'1.2-2' }} PLN
+      </div>
+    </div>
+    <div class="fullWidth">
+      <span class="orderDate">Order date:</span>
+      <span class="orderDateValue"> {{ order.dateOfOrder | date: 'MMM d, y, h:mm a' }}</span>
+      <span id="amountOfItems">Qty: {{ quantity }}</span>
+    </div>
+  </div>
+  <hr>
+  <div class="item" *ngFor="let item of order.items">
+    <div class="imageBackground">
+      <img class="image" id="{{item.productId}}">
+    </div>
+    <div class="itemData">
+      <div class="itemHeader">
+        <div class="itemTitle"> {{ item.title }} </div>
+        <div class="itemPrice">
+           {{ item.price * item.quantity | number:'1.2-2'}} PLN
+        </div>
+      </div>
+      <div class="parameterContainer">
+        <span class="parameterContainer2">
+          <span class="size">{{ item.size }}</span>
+          <span class="parameter" *ngFor="let value of item.parameterValues">| {{value}} </span>
+        </span>
+        <div class="itemQuantity">Qty: {{item.quantity}}</div>
+      </div>
+    </div>
+  </div>
+  <hr>
+    <div id="delivery">
+      <div class="deliveryHeader">Delivery</div>
+      <div class="addressHeader">Address</div>
+      <div class="addressData">{{ order.firstName }} {{ order.lastName }}, <span class="notoSans">@{{order.username}}</span></div>
+      <div class="addressData">{{ order.zipCode }} {{ order.city }}, {{order.street}}, {{ order.houseNumber }}</div>
+      <div class="addressData"> {{ order.phone | phoneNumber }}</div>
+    </div>
+    <div id="status">
+      <div class="order-statuses">
+        <div class="order-status-normal urbanist-regular">
+          <div class="order-date">
+            {{ order.dateOfOrder | date: 'medium'}}
+          </div>
+          <div class="order-header">
+            User has created an order
+          </div>
+          <div class="order-status-value">
+            <img src="../../../assets/img/icon-tick-96.png" height="17px">
+            <div class="custom-status-line-green"></div>
+          </div>
+        </div>
+
+        <div class="order-status-small urbanist-regular">
+          <div class="order-date">
+            {{ order.sentDate ? (order.sentDate | date: 'medium') : 'Unknown' }}
+          </div>
+          <div class="order-header" *ngIf="order.sentDate != null">
+            Order has been sent
+          </div>
+          <div class="send-order" *ngIf="order.sentDate == null" (click)="changeStatus('SENT')">
+            Send Order
+          </div>
+          <div class="order-status-value">
+            <img src="assets/img/icon-blue-tick.png" height="17px" *ngIf="order.sentDate == null" (click)="changeStatus('SENT')">
+            <img src="../../../assets/img/icon-tick-96.png" height="17px" *ngIf="order.sentDate != null">
+            <div class="custom-status-line-green" [style.background-color]="order.sentDate != null ? '#00780C' : '#d6d6d6'"></div>
+          </div>
+        </div>
+
+        <div class="order-status-normal urbanist-regular">
+          <div class="order-date">
+            {{ order.completionDate ? (order.completionDate | date: 'medium') : 'Unknown' }}
+          </div>
+          <div class="order-header" [style.color]="order.completionDate != null ? 'black' : 'grey'">
+            Order has been completed
+          </div>
+          <div class="order-status-value">
+            <div class="custom-dot" *ngIf="order.completionDate == null"></div>
+            <img src="../../../assets/img/icon-tick-96.png" height="17px" *ngIf="order.completionDate != null">
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,157 @@
+<app-banner></app-banner>
+<div id="main" class="urbanist-regular">
+  <div class="header urbanist-regular">
+    <span class="header-title">
+      Orders <span class="header-value"> ({{ filteredOrders.length }})</span>
+    </span>
+    <div class="stats-list">
+      <div class="stat-container">
+        <span class="stat-header">New Orders</span>
+        <br>
+        <div style="height: 50px; width: 100px">
+          <canvas id="chart" #ordersChart></canvas>
+        </div>
+      </div>
+      <div class="custom-vertical-line">
+
+      </div>
+      <div class="stat-container">
+        <span class="stat-header">Pending</span>
+        <br>
+        <span class="stat-value">{{ InProgressOrders }}</span>
+      </div>
+      <div class="custom-vertical-line">
+
+      </div>
+      <div class="stat-container">
+        <span class="stat-header">Sent</span>
+        <br>
+        <span class="stat-value">{{ SentOrders }}</span>
+      </div>
+      <div class="custom-vertical-line">
+
+      </div>
+      <div class="stat-container">
+        <span class="stat-header">Completed</span>
+        <br>
+        <span class="stat-value">{{ CompletedOrders }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-list urbanist-regular">
+    <div class="cell">
+      <div class="cellTitle">
+        Search for order
+      </div>
+      <div class="cellValue">
+        <div class="lupe-container center">
+          <img src="assets/img/icon-loupe.png" width="30px" height="30px">
+        </div>
+        <input type="text" class="custom-input" placeholder="Search" [(ngModel)]="searchText">
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cellTitle">
+        <label for="status">Status</label>
+      </div>
+      <div class="cellValue">
+        <select id="status" class="custom-select">
+          <option value="All" (click)="filterByStatus('ALL')">All</option>
+          <option value="Pending" (click)="filterByStatus('IN_PROGRESS')">Pending</option>
+          <option value="Sent" (click)="filterByStatus('SENT')">Sent</option>
+          <option value="Completed" (click)="filterByStatus('COMPLETED')">Completed</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="cell">
+      <div class="cellTitle">
+        Price
+        {{ minValue }} - {{ maxValue }}
+      </div>
+      <div class="cellValue slider-container">
+        <div class="slider">
+          <div class="progress" [ngStyle]="{'left.%': leftPercentage, 'right.%': rightPercentage}"></div>
+        </div>
+        <div class="range-input">
+          <input type="range" class="range-min" [value]="minValue" [min]="minRange" [max]="maxRange" (input)="updateMinRange($event)">
+          <input type="range" class="range-max" #rangeMax [value]="maxValue" min="0" max="1" (input)="updateMaxRange($event)">
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cellTitle">
+        <label for="products">Country</label>
+      </div>
+      <div class="cellValue">
+        <select id="products" class="custom-select">
+        <option value="all" (click)="filterByCountry('ALL')">All</option>
+        <ng-container *ngFor="let country of countries">
+          <option value="{{ country }}" (click)="filterByCountry(country)">{{ country }}</option>
+        </ng-container>
+        </select>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cellTitle">
+        Items
+        {{ minValue2 }} - {{ maxValue2 }}
+      </div>
+      <div class="cellValue slider-container">
+        <div class="slider">
+          <div class="progress" [ngStyle]="{'left.%': leftPercentage2, 'right.%': rightPercentage2}"></div>
+        </div>
+        <div class="range-input">
+          <input type="range" class="range-min" [value]="minValue2" [min]="minRange2" [max]="maxRange2" (input)="updateMinRange2($event)">
+          <input type="range" class="range-max" #rangeMax2 [value]="maxValue2" min="0" max="1" (input)="updateMaxRange2($event)">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table">
+    <div class="table-header">
+      <div class="header-column idColumn center">#</div>
+      <div class="header-column sendTimeColumn">Send Time</div>
+      <div class="header-column userNameColumn">Username</div>
+      <div class="header-column priceColumn">Price</div>
+      <div class="header-column addressColumn">Address</div>
+      <div class="header-column statusColumn">Status</div>
+      <div class="header-column itemsColumn">Items</div>
+      <div class="header-column companiesColumn">Companies</div>
+      <div class="header-column updateColumn">Update</div>
+    </div>
+    <ng-container *ngFor="let order of filteredOrders | search: searchText">
+      <div class="table-row" (click)="goToOrder(order.id)">
+        <div class="column idColumn center">{{ order.id }}</div>
+        <div class="column sendTimeColumn urbanist-regular">
+          {{ order.sendtime | date:'mediumDate' }}
+        </div>
+        <div class="column userNameColumn urbanist-regular">
+          {{ order.username }}
+        </div>
+        <div class="column priceColumn urbanist-regular">
+          {{ order.price | number:'1.2-2' }} $
+        </div>
+        <div class="column addressColumn wrapText">
+          {{ order.country }} {{ order.city }} {{ order.street }}
+        </div>
+        <div class="column statusColumn">
+          <span style="color: #215c8d" *ngIf="order.status == 'IN_PROGRESS'"><img src="../../../assets/img/status-30.svg" height="12"> 30%</span>
+          <span style="color: #215c8d" *ngIf="order.status == 'SENT'"><img src="../../../assets/img/status-70.svg" height="12"> 70%</span>
+          <span style="color: #215c8d" *ngIf="order.status == 'COMPLETED'"><img src="../../../assets/img/status-100.svg" height="12"> 100%</span>
+        </div>
+        <div class="column itemsColumn urbanist-regular">
+          {{ order.items }}
+        </div>
+        <div class="column companiesColumn wrapText urbanist-regular">
+          {{ order.companies.join(', ') }}
+        </div>
+        <div class="column updateColumn urbanist-regular">
+          {{ order.sendtime | dateDifference }}
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<app-banner></app-banner>
+<div class="main">
+  <div id="header">
+    <div class="fullWidth actualStatus">
+      <span class="inprogress" *ngIf="orderStatus?.status == 'IN_PROGRESS'">IN PROGRESS</span>
+      <span *ngIf="orderStatus?.status == 'SENT'"><span class="sent">SENT</span> {{ orderStatus.time | date:'medium' }}</span>
+      <span *ngIf="orderStatus?.status == 'COMPLETED'"><span class="completed">COMPLETED</span> {{ orderStatus.time | date:'medium' }}</span>
+    </div>
+    <div id="orderId">
+      Order ID: {{ order.id }}
+    </div>
+    <div id="orderPrice">
+      {{ order.price | number:'1.2-2' }} PLN
+    </div>
+    <div class="fullWidth">
+      <span id="orderDate">
+        Order date:
+        <span id="sendTime">
+          {{ order.sendTime | date: 'medium' }}
+        </span>
+      </span>
+      <span class="amountOfProducts">Qty: {{ order.amountOfProducts }}</span>
+    </div>
+  </div>
+  <ng-container *ngFor="let item of order.items">
+    <hr>
+    <div class="companyBar">
+      {{ item.companyName }}
+       <span style="font-size: 17px; font-family: 'Sometype Mono', monospace; color: red" *ngIf="item.lastStatus.status == 'IN_PROGRESS'">IN PROGRESS</span>
+       <span style="font-size: 17px; font-family: 'Sometype Mono', monospace; color: green" *ngIf="item.lastStatus.status == 'SENT'">SENT {{ orderStatus.time | date:'medium' }}</span>
+    </div>
+    <hr>
+    <div class="item" *ngFor="let item2 of item.items">
+      <div class="itemBackground">
+        <img class="image" id="{{item2.orderItemId}}">
+      </div>
+      <div class="itemData">
+        <div style="margin-top: 20px; height: 40px" class="fullWidth">
+          <div class="itemTitle">
+            {{ item2.title }}
+          </div>
+          <div class="itemPrice">
+            {{ item2.price * item2.quantity | number:'1.2-2' }} PLN
+          </div>
+        </div>
+        <div style="height: 30px; margin-top: 15px; color: grey" class="fullWidth">
+          <span class="itemSize">
+            {{ item2.size }}
+          </span>
+          <span class="parameter" *ngFor="let value of item2.parameterValues">| {{ value }} </span>
+          <div class="qty">Qty: {{ item2.quantity }}</div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <hr>
+  <div id="delivery">
+    <div class="deliveryHeader">Delivery</div>
+    <div class="addressHeader">Address</div>
+    <div class="name">{{ order.firstName }} {{ order.lastName }},
+      <span class="username">@{{ order.username }}</span></div>
+    <div class="phone">
+      {{ order.zipcode }} {{ order.city }}, {{ order.street }}, {{ order.houseNumber }}
+    </div>
+    <div class="phone"> {{ order.phone | phoneNumber }}</div>
+  </div>
+</div>

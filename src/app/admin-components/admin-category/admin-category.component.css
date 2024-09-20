@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+#header {
+  width: 100%;
+  height: 100px;
+  line-height: 90px;
+  font-size: 38px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 600;
+}
+
+.categoryTableRow {
+  width: 804px;
+  height: 50px;
+  background-color: white;
+  margin-top: 10px;
+  border-bottom: 1px solid grey;
+  float: left;
+  margin-left: 300px;
+  cursor: pointer;
+}
+
+.subCategoryTableRow {
+  margin-left: 350px;
+  width: 765px;
+  height: 50px;
+  background-color: white;
+  margin-top: 10px;
+  border-bottom: 1px solid grey;
+  float: left;
+  cursor: pointer;
+}
+
+.subCategoryTableHeader {
+  margin-left: 350px;
+  width: 760px;
+  height: 40px;
+  margin-top: 10px;
+  line-height: 40px;
+  border-bottom: 1px solid #cccccc;
+  float: left;
+}
+
+label {
+  margin-top: 14px;
+}
+
+.categoryTableHeader {
+  width: 800px;
+  height: 40px;
+  margin-top: 10px;
+  line-height: 40px;
+  border-bottom: 1px solid #cccccc;
+  margin-left: 300px;
+  float: left;
+}
+
+.tableColumn {
+  height: 50px;
+  float: left;
+  text-align: center;
+  line-height: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+}
+
+.tableHeaderColumn {
+  height: 50px;
+  float: left;
+  text-align: center;
+  color: grey;
+}
+
+.stat {
+  width: 240px;
+  height: 255px;
+  box-shadow: 10px 10px 50px #cccccc;
+  background-color: white;
+  border-radius: 10px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 600;
+}
+
+#nav {
+  width: 100%;
+  height: 50px;
+  margin-top: 30px;
+  border-bottom: 1px solid #cccccc;
+  justify-content: space-between;
+  display: flex;
+}
+
+.inp {
+  border-color: rgb(117 117 117);
+  border-left-width: 0 !important;
+  border-radius: 0 !important;
+  border-right-width: 0 !important;
+  border-top-width: 0 !important;
+  border-bottom-width: 1px;
+  box-shadow: none !important;
+  font-weight: 400 !important;
+  outline: .125rem solid transparent !important;
+  outline-offset: .125rem !important;
+  width: 100%;
+}
+
+.categoryInput {
+  border-color: rgb(117 117 117);
+  border-left-width: 0 !important;
+  border-radius: 0 !important;
+  border-right-width: 0 !important;
+  border-top-width: 0 !important;
+  border-bottom-width: 1px;
+  box-shadow: none !important;
+  font-weight: 400 !important;
+  outline: .125rem solid transparent !important;
+  outline-offset: .125rem !important;
+  padding: 0.625rem 0;
+  width: 760px;
+}
+
+.subCategoryInput {
+  border-color: rgb(117 117 117);
+  border-left-width: 0 !important;
+  border-radius: 0 !important;
+  border-right-width: 0 !important;
+  border-top-width: 0 !important;
+  border-bottom-width: 1px;
+  box-shadow: none !important;
+  font-weight: 400 !important;
+  outline: .125rem solid transparent !important;
+  outline-offset: .125rem !important;
+  padding: 0.625rem 0;
+  width: 725px;
+}
+
+.filterKeyInput {
+  width: 110px;
+}
+
+.filterValueInput {
+  width: 80px
+}
+
+.filter-container {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 1s ease-in-out;
+  float: left;
+}
+
+.filter-container.opened {
+  max-height: 1000px;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.chart {
+  width: 100%;
+  height: 86%;
+  padding-bottom: 5px;
+}
+
+.statTitle {
+  width: 100%;
+  height: 14%;
+  padding: 10px 0 0 20px;
+}
+
+#statsBar {
+  width: 100%;
+  height: 275px;
+  margin-top: 10px;
+  justify-content: space-around;
+  display: flex;
+}
+
+#main {
+  width: 1400px;
+  height: 920px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 70px;
+}
+
+.tab {
+  height: 50px;
+  float: left;
+  border-bottom: 2px solid dodgerblue;
+  width: 120px;
+  text-align: center;
+  color: dodgerblue;
+  line-height: 50px;
+}
+
+.filterInput {
+  width: 150px;
+  height: 32px;
+  border: none;
+  border-bottom: 1px solid whitesmoke;
+  margin-right: 15px;
+}
+
+.filterHeaderKey {
+  width: 140px;
+  border-bottom: 1px solid #cccccc;
+  height: 35px;
+  line-height: 35px;
+  color: grey;
+}
+
+.filterHeaderValues {
+  width: 610px;
+  border-bottom: 1px solid #cccccc;
+  height: 35px;
+  line-height: 35px;
+  margin-left: 10px;
+  color: grey;
+}
+
+.filterHeader {
+  margin-left: 400px;
+  width: 750px;
+  height: 35px;
+  display: flex;
+}
+
+.filterKey {
+  width: 140px;
+  border-bottom: 1px solid black;
+  height: 35px;
+  line-height: 35px;
+  float: left;
+  justify-content: space-between;
+  display: flex;
+}
+
+.filterRow {
+  margin-left: 400px;
+  width: 750px;
+  height: 35px;
+}
+
+.filterValuesRow {
+  border-bottom: 1px solid black;
+  height: 35px;
+  margin-left: 10px;
+  line-height: 35px;
+  float: left;
+}
+
+.createFilter {
+  height: 35px;
+  margin-left: 400px;
+  line-height: 32px;
+  float: left;
+}
+
+.addFilterValue {
+  height: 35px;
+  margin-left: 10px;
+  line-height: 32px;
+  float: left;
+}
+
+.idColumn {
+  width: 110px;
+  color: dodgerblue;
+}
+
+.nameColumn {
+  width: 150px;
+}
+
+.productsColumn {
+  width: 130px;
+}
+
+.salesColumn {
+  width: 160px;
+}
+
+.statusColumn {
+  width: 100px;
+}
+
+.filtersColumn {
+  width: 110px;
+}
+
+.subCategoryColumn {
+  width: 110px;
+}
+
+.checkboxContainer {
+  width: 40px;
+}
+
+.active1 {
+  color: green;
+}
+
+.delete1 {
+  color: red;
+}
+
+.inputContainer {
+  border: none;
+}

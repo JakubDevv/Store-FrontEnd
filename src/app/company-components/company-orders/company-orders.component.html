@@ -1,0 +1,372 @@
+<app-banner></app-banner>
+<div id="main">
+  <div class="pageBackground">
+    <div class="main-container urbanist-regular">
+      <div class="statuses-container2">
+        <div class="statuses-header">
+          <span class="orders-statuses-header">
+            Orders Statuses
+          </span>
+          <div class="statuses-container center">
+            <div class="chart-1">
+              <canvas #myChart14></canvas>
+            </div>
+            <div class="chart-2">
+              <canvas #myChart13></canvas>
+            </div>
+            <div class="chart-3">
+              <canvas #myChart12></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="orders-statuses-value">
+          <div>
+            <span class="orders-statuses-done">{{ this.allStatuses[1] + this.allStatuses[2] }}</span>
+            /{{ allOrders.length }}
+          </div>
+        </div>
+      </div>
+      <div class="personalized-data-container">
+        <div class="tab-list">
+          <div style="width: 60px;" class="center tab" [class.selectedTab]="selectedTab == 'week'" (click)="selectDate('week')">
+            7 d
+          </div>
+          <div style="width: 75px;" class="center tab" [class.selectedTab]="selectedTab == 'month'" (click)="selectDate('month')">
+            30 d
+          </div>
+          <div style="width: 75px;" class="center tab" [class.selectedTab]="selectedTab == 'year'" (click)="selectDate('year')">
+            year
+          </div>
+        </div>
+        <div class="new-container">
+          <div class="new-customers-container">
+            <div class="stat-header">
+              <div class="stat-icon-background center">
+                <img src="../../../assets/img/icon-line-chart-60.png" height="20px">
+              </div>
+              New Customers
+            </div>
+            <div class="new-customers">
+              <div role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="256" id="newCustomersProgressBar" #newCustomersProgressBar style="--value: 100"></div>
+              <div class="new-customers-value">
+                {{ newCustomers }}
+              </div>
+            </div>
+          </div>
+          <div class="new-countries-container">
+            <div class="stat-header">
+              <div class="stat-icon-background center">
+                <img src="assets/img/icon-map.png" height="20px">
+              </div>
+              Countries
+            </div>
+            <div class="new-countries">
+              <div class="new-countries-value">
+                +{{ newCountries }}
+              </div>
+                new country coverage
+                <br>
+                this {{ selectedTab }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="top-countries-container">
+        <div class="top-countries-header">
+          <span class="top-countries-title">Top Countries</span>
+          <div class="all-countries">{{ countriesStats.length }} Countries</div>
+        </div>
+        <div class="top-countries">
+          <ng-container *ngFor="let country of countriesStats.slice(0,3); let i = index;">
+            <div class="top-country">
+              <div class="top-country-percentage">
+                +{{ Math.round((country.money / totalIncome) * 100) }}%
+              </div>
+
+              <div class="top-country-bar-background" style="background-image: url('../../../assets/img/dots-background.jpg');">
+                <div class="top-country-bar" [style.height.px]="Math.round((country.money / totalIncome) * 160)">
+
+                </div>
+                <div class="top-country-name center">
+                  {{ country.name }}
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+
+    </div>
+      <div class="order-updates-container">
+        <div class="order-updates-header urbanist-regular">
+          Order Updates
+        </div>
+        <div class="button-container center" (click)="prev()">
+          <img src="assets/img/icon-back.png" height="30px">
+        </div>
+        <div class="order-updates-list">
+
+          <ng-container *ngFor="let status of statusChanges; let i=index; let f=first">
+            <div class="order-status" [hidden]="i < currentIndex || i >= currentIndex + visibleItemsCount">
+              <div class="user-photo-container center">
+                <img [src]="usersPhotos.get(status.userId) || 'assets/img/Default-user-photo.png'" height="40px" class="round-100">
+              </div>
+              <div class="status-order-id center urbanist-regular">
+                #{{ status.orderId }}
+              </div>
+              <div class="status-date-time">
+                <div class="status-date">{{ status.date | date: 'dd/MM/yyyy' }}
+                </div>
+                <div class="status-time">{{ status.date | date: 'hh:mm a' }}
+                </div>
+              </div>
+              <div class="status-progress">
+                <div *ngIf="status.statusTo == 'IN_PROGRESS'">
+                  <div class="status-completed"></div>
+                  <div class="status-pending"></div>
+                  <div class="status-pending"></div>
+                </div>
+                <div *ngIf="status.statusTo == 'SENT'">
+                  <div class="status-completed"></div>
+                  <div class="status-completed"></div>
+                  <div class="status-pending"></div>
+                </div>
+                <div *ngIf="status.statusTo == 'COMPLETED'">
+                  <div class="status-completed"></div>
+                  <div class="status-completed"></div>
+                  <div class="status-completed"></div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+        </div>
+        <div class="button-container center" (click)="next()">
+          <img src="assets/img/icon-arrow-6.png" height="30px">
+        </div>
+      </div>
+
+    <div class="filters">
+
+      <div class="search-filter-container">
+        <div class="lupe center">
+          <img src="assets/img/icon-loupe.png" width="30px" height="30px">
+        </div>
+        <input type="text" placeholder="Search" class="filter-search-input urbanist-regular" [(ngModel)]="searchText">
+      </div>
+
+      <div class="filter-header urbanist-regular" (click)="countriesList = !countriesList" [class.filter-active]="countriesList">
+        Countries
+        <img src="assets/img/icon-black-expand-arrow.png" height="20px" *ngIf="!countriesList">
+        <img src="assets/img/icon-collapse-arrow.png" height="20px" *ngIf="countriesList">
+      </div>
+
+      <div class="filter-container countries-filter example" [ngClass]="{ opened: countriesList }">
+        <ng-container *ngFor="let country of countries2; let i = last">
+          <div class="urbanist-regular country-filter" [style.border-bottom]="i ? '' : '1px solid #f9f9f9'" [class.active-filter]="selectedCountry == country" (click)="selectCountry(country)">
+            {{ country }}
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="filter-container categories-filter example" [ngClass]="{ opened: categoriesList }">
+        <ng-container *ngFor="let category of categories2; let i = last">
+          <div class="urbanist-regular country-filter" [style.border-bottom]="i ? '' : '1px solid #f9f9f9'" [class.active-filter]="selectedCategory == category" (click)="selectCategory(category)">
+            {{ category }}
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="filter-header urbanist-regular" (click)="categoriesList = !categoriesList" [class.filter-active]="categoriesList">
+        Categories
+        <img src="assets/img/icon-black-expand-arrow.png" height="20px" *ngIf="!categoriesList">
+        <img src="assets/img/icon-collapse-arrow.png" height="20px" *ngIf="categoriesList">
+      </div>
+
+      <div class="user-filters urbanist-regular">
+        <div class="all-users-filter center"
+                       [style.background-color]="activeFilters.includes('COMPLETED') ? '#3a3a3a' : '#FFFFFF'" [style.color]="activeFilters.includes('COMPLETED') ? '#FFFFFF' : '#000000'"
+                       (click)="selectStatus('COMPLETED')">
+          Completed
+        </div>
+        <div class="users-filter center"
+                       [style.background-color]="activeFilters.includes('SENT') ? '#3a3a3a' : '#FFFFFF'" [style.color]="activeFilters.includes('SENT') ? '#FFFFFF' : '#000000'"
+                       (click)="selectStatus('SENT')">
+          Sent
+        </div>
+        <div class="users-filter center"
+             [style.background-color]="activeFilters.includes('IN_PROGRESS') ? '#3a3a3a' : '#FFFFFF'" [style.color]="activeFilters.includes('IN_PROGRESS') ? '#FFFFFF' : '#000000'"
+          (click)="selectStatus('IN_PROGRESS')">
+          Pending
+        </div>
+      </div>
+
+      <div class="price-filter-container urbanist-regular">
+        <div class="price-filter-header">
+          Price
+        </div>
+        <div class="price-filter">
+          <div class="slider">
+            <div class="progress" [ngStyle]="{'left.%': leftPercentage, 'right.%': rightPercentage}"></div>
+          </div>
+
+          <div class="range-input">
+            <input type="range" class="range-min" [value]="minValue" [min]="minRange" [max]="maxRange"
+                   (input)="updateMinRange($event)">
+            <input type="range" id="range-max" #rangeMax class="range-max" [value]="maxValue" min="0" max="1000"
+                   (input)="updateMaxRange($event)">
+          </div>
+
+        </div>
+        <div class="price-filter-value">
+          {{ minValue }} - {{ maxValue }}
+        </div>
+      </div>
+
+    </div>
+    <div class="table">
+        <div class="tableRowHeader">
+
+          <div class="tableRowInnerHeader">
+
+            <div class="idColumn poppins-low tableHeaderColumn">
+              #
+            </div>
+            <div class="nameColumn poppins-low tableHeaderColumn">
+              User
+            </div>
+            <div class="dateColumn poppins-low tableHeaderColumn">
+              Order Date
+            </div>
+            <div class="statusColumn poppins-low tableHeaderColumn">
+              Status
+            </div>
+            <div class="priceColumn poppins-low tableHeaderColumn">
+              Price
+            </div>
+            <div class="addressColumn poppins-low tableHeaderColumn">
+              City
+            </div>
+            <div class="productsColumn tableHeaderColumn">
+              Categories
+            </div>
+          </div>
+
+      </div>
+      <div class="tableDataContainer">
+
+        <ng-container *ngFor="let order of orders">
+          <div class="tableRow" [class.selectedOrder]="selectedOrders.includes(order.id)">
+            <div class="tableRowInner" [class.selectedOrder]="selectedOrders.includes(order.id)">
+              <div class="idColumn">
+                <input type="checkbox"
+                       (change)="updateStats(order.id, order.status, order.price, order.firstName, order.lastName)" [checked]="selectedOrders.includes(order.id)"
+                       data-toggle="tooltip" data-placement="left" title="{{order.id}}">
+              </div>
+              <div class="nameColumn" (click)="goToOrder(order.id)">
+                <div class="first-last-name poppins-regular">
+                  {{ order.firstName }} {{ order.lastName }}
+                </div>
+                <div class="nickname poppins-low">
+                  @{{ order.firstName }}
+                </div>
+              </div>
+              <div class="dateColumn">
+                <div class="column-date">{{ order.date | date: 'dd/MM/yyyy' }}
+                </div>
+                <div class="column-time">{{ order.date | date: 'hh:mm a' }}
+                </div>
+              </div>
+              <div class="statusColumn" (click)="goToOrder(order.id)">
+                <div class="statusColumn2" style="background-color: #000000">
+
+                </div>
+                <div class="statusColumn2" [style.background-color]="order.status == 'SENT' || order.status == 'COMPLETED' ? '#000000' : '#b8b8ba'">
+
+                </div>
+                <div class="statusColumn2" [style.background-color]="order.status == 'COMPLETED' ? '#000000' : '#b8b8ba'">
+
+                </div>
+              </div>
+              <div class="priceColumn poppins-low" (click)="goToOrder(order.id)">
+                ${{ order.price | number: '1.2-2' }}
+              </div>
+              <div class="addressColumn poppins-low" (click)="goToOrder(order.id)">{{ order.city }}
+              </div>
+              <div class="productsColumn" (click)="goToOrder(order.id)">
+                <div class="productCategory open-sans" [class.selectedOrder2]="selectedOrders.includes(order.id)"
+                     *ngFor="let category of order.categories">{{ category.name }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+      </div>
+      <div class="pages-container">
+        <ng-container *ngFor="let item of [].constructor(pages); let i = index">
+          <div class="pageButton center" [class.selectedPageButton]="i==page" (click)="changePage(i)">{{ i + 1 }}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="stats-container urbanist-regular">
+      <div class="stats-header">
+        Stats By
+        <span class="total-selected-header">Total</span>
+        <span class="total-selected">{{ this.selectedTotalIncome | number: '1.2-2' }}</span>
+      </div>
+      <div class="stat-container center urbanist-regular">
+        <canvas class="top" id="myChart8d" #myChart8></canvas>
+        <div class="circle-outer">
+          <div class="circle-inner">
+          </div>
+        </div>
+        <div class="stat-title">
+          Category
+        </div>
+        <div class="stat-value">
+          {{ this.categories.length }}
+        </div>
+      </div>
+      <div class="stat-container center urbanist-regular">
+        <canvas class="top" id="myChart9d" #myChart9></canvas>
+        <div class="circle-outer">
+          <div class="circle-inner">
+          </div>
+        </div>
+        <div class="stat-title">
+          Users
+        </div>
+        <div class="stat-value">
+          {{ this.users2.length }}
+        </div>
+      </div>
+      <div class="stat-container center urbanist-regular">
+        <canvas class="top" id="myChart10d" #myChart10></canvas>
+        <div class="circle-outer">
+          <div class="circle-inner">
+          </div>
+        </div>
+        <div class="stat-title">
+          Products
+        </div>
+        <div class="stat-value">
+          {{ this.productsL.length }}
+        </div>
+      </div>
+      <div class="stat-container center urbanist-regular">
+        <canvas class="top" id="myChart11d" #myChart11></canvas>
+        <div class="circle-outer">
+          <div class="circle-inner">
+          </div>
+        </div>
+        <div class="stat-title">
+          Status
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

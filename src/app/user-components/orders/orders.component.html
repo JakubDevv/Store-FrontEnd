@@ -1,0 +1,249 @@
+<app-banner></app-banner>
+<div id="main" class="urbanist-regular">
+  <div class="header urbanist-regular">
+    <span class="header-title">
+      Orders <span class="header-value"> ({{ orders.length }})</span>
+    </span>
+    <div class="stats-list">
+      <div class="stat-container">
+        <span class="stat-header">Companies</span>
+        <br>
+        <span class="stat-value">{{ companies.length }}</span>
+      </div>
+      <div class="custom-vertical-line">
+
+      </div>
+      <div class="stat-container">
+        <span class="stat-header">Products</span>
+        <br>
+        <span class="stat-value">{{ productsAmount }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-list urbanist-regular">
+    <div class="cell">
+      <div class="cellTitle">
+        Search for order
+      </div>
+      <div class="cellValue">
+        <div class="lupe-container center">
+          <img src="assets/img/icon-loupe.png" width="30px" height="30px">
+        </div>
+        <input type="text" class="custom-input" placeholder="Search" [(ngModel)]="searchText">
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cellTitle">
+        <label for="status">Status</label>
+      </div>
+      <div class="cellValue">
+        <select id="status" class="custom-select">
+          <option value="all" (click)="filterByStatus('ALL')">All</option>
+          <option value="pending" (click)="filterByStatus('IN_PROGRESS')">Pending</option>
+          <option value="sent" (click)="filterByStatus('SENT')">Sent</option>
+          <option value="completed" (click)="filterByStatus('COMPLETED')">Completed</option>
+        </select>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cellTitle">
+        <label for="companies">Companies</label>
+      </div>
+      <div class="cellValue">
+        <select id="companies" class="custom-select">
+          <option value="all" (click)="filterByCompany('ALL')">All</option>
+          <ng-container *ngFor="let company of companies">
+            <option value="{{company}}" (click)="filterByCompany(company)">{{company}}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cellTitle">
+        Price {{ minValue }} - {{ maxValue }}
+      </div>
+      <div class="cellValue slider-container">
+        <div class="slider">
+          <div class="progress" [ngStyle]="{'left.%': leftPercentage, 'right.%': rightPercentage}"></div>
+        </div>
+        <div class="range-input">
+          <input type="range" class="range-min" [value]="minValue" [min]="minRange" [max]="maxRange" (input)="updateMinRange($event)">
+          <input type="range" class="range-max" #rangeMax [value]="maxValue" min="0" max="1000" (input)="updateMaxRange($event)">
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cellTitle">
+        <label for="products">Products</label>
+      </div>
+      <div class="cellValue">
+        <select id="products" class="custom-select">
+          <option value="all" (click)="filterByProduct('ALL')">All</option>
+          <ng-container *ngFor="let product of products">
+            <option value="{{ product }}" class="urbanist-regular" (click)="filterByProduct(product)">{{ product }}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+    <div class="cell">
+      <div class="cellTitle">
+        <label for="sizes">Sizes</label>
+      </div>
+      <div class="cellValue">
+        <select id="sizes" class="custom-select">
+          <option value="all" (click)="filterBySize('ALL')">All</option>
+          <ng-container *ngFor="let size of sizes">
+            <option value="{{ size }}" (click)="filterBySize(size)">{{ size }}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="table">
+    <div class="table-header">
+      <div class="id-column center">#</div>
+      <div class="date-column">Date</div>
+      <div class="price-column">Price</div>
+      <div class="companies-column">Companies</div>
+      <div class="status-column">Status</div>
+      <div class="address-column">Address</div>
+      <div class="products-column">Products</div>
+      <div class="date-receipt-column">Date of receipt</div>
+    </div>
+    <ng-container *ngFor="let order of orders">
+      <div class="table-row" (click)="showFilters(order.id.toString())">
+        <div class="id-column center">{{ order.id }}</div>
+        <div class="date-column urbanist-regular">{{ order.date | date:'mediumDate' }}
+        </div>
+        <div class="price-column urbanist-regular">
+          ${{ order.price | number:'1.2-2' }}
+        </div>
+        <div class="companies-column urbanist-regular">
+          <div class="productCategory open-sans" *ngFor="let company of order.companies">{{ company }}</div>
+        </div>
+        <div class="status-column">
+          <div class="status-column-2">
+            <img src="../../../assets/img/status-100.svg" height="12px" *ngIf="order.status == 'COMPLETED'">
+            <img src="../../../assets/img/status-70.svg" height="12px" *ngIf="order.status == 'SENT'">
+            <img src="../../../assets/img/status-30.svg" height="12px" *ngIf="order.status == 'IN_PROGRESS'">
+            <span class="status" *ngIf="order.status == 'COMPLETED'">3/3</span>
+            <span class="status" *ngIf="order.status == 'SENT'">2/3</span>
+            <span class="status" *ngIf="order.status == 'IN_PROGRESS'">1/3</span>
+          </div>
+        </div>
+        <div class="address-column urbanist-regular">
+          {{ order.country }}, {{ order.city }}, {{ order.street }} {{ order.num }}
+        </div>
+        <div class="products-column urbanist-regular">
+          <ng-container *ngFor="let item of uniqueProducts(order); let i = index">
+            <div class="product center" [style.left]="i * 30 + 'px'"><img [src]="productPhotos.get(item)" height="32px" class="round-100"/> </div>
+          </ng-container>
+          <div class="unique-products center" *ngIf="order.items.length > 3">
+            +{{ uniqueProducts(order).length - 3 }}
+          </div>
+        </div>
+        <div class="date-receipt-column urbanist-regular">{{ order.dateReceipt | date:'mediumDate' }}
+        </div>
+      </div>
+      <div class="filter-container" [ngClass]="{ opened: openedFilters.indexOf(order.id.toString()) !== -1 }">
+        <hr class="custom-line">
+        <ng-container *ngFor="let item of order.items">
+          <div class="item">
+            <div class="imageBackground">
+              <img class="image" [src]="productPhotos.get(item.productId)">
+            </div>
+            <div class="itemData">
+              <div class="itemHeader">
+                <div class="itemTitle">{{ item.title }}</div>
+                <div class="itemPrice">
+                  {{ item.price * item.quantity | number: '1.2-2' }} PLN
+                </div>
+              </div>
+              <div class="parameterContainer">
+              <span class="parameterContainer2">
+                <span class="size">{{ item.size }}</span>
+                  <span class="parameter" *ngFor="let value of item.parameters">| {{ value }} </span>
+                </span>
+                <div class="itemQuantity">Qty: {{ item.quantity }}</div>
+              </div>
+            </div>
+          </div>
+          <hr class="custom-line">
+        </ng-container>
+        <div class="order-details-1">
+
+          <div class="order-details-2">
+
+            <div class="order-additional-data">
+              <div class="order-additional-data-container">
+                <div class="order-additional-data-header">
+                  Phone
+                </div>
+                <div class="order-additional-data-value">
+                  {{ order.phone | phoneNumber }}
+                </div>
+              </div>
+
+              <div class="order-additional-data-container">
+                <div class="order-additional-data-header">
+                  Zip Code
+                </div>
+                <div class="order-additional-data-value">
+                  {{ order.zipCode }}
+                </div>
+              </div>
+            </div>
+
+            <div class="order-status-list">
+              <div class="order-status-big urbanist-regular">
+                <div class="order-status-time">
+                  {{ order.date | date: 'medium'}}
+                </div>
+                <div class="order-status-header">
+                  You have created an order
+                </div>
+                <div class="order-status-value">
+                  <img src="../../../assets/img/icon-tick-96.png" height="17px">
+                  <div class="custom-status-line-green"></div>
+                </div>
+              </div>
+
+              <div class="order-status-small urbanist-regular">
+                <div class="order-status-time">
+                  {{ order.send ? (order.send | date: 'medium') : 'Unknown' }}
+                </div>
+                <div class="order-status-header" [style.color]="order.send == null ? 'gray' : 'black'">
+                  Order has been sent
+                </div>
+                <div class="order-status-value">
+                  <img src="../../../assets/img/icon-tick-96.png" height="17px" *ngIf="order.send != null">
+                  <div class="custom-dot" *ngIf="order.send == null"></div>
+                  <div class="custom-status-line" [style.background-color]="order.send == null ? '#d6d6d6' : '#00780C'"></div>
+                </div>
+              </div>
+
+              <div class="order-status-normal urbanist-regular">
+                <div class="order-status-time">
+                  {{ order.dateReceipt ? (order.dateReceipt | date: 'medium') : 'Unknown' }}
+                </div>
+                <div class="order-status-header">
+                  <span class="order-uncompleted" *ngIf="order.send == null">Order has been completed</span>
+                  <span class="complete-order" *ngIf="order.send != null && order.dateReceipt == null" (click)="completeOrder(order.id)">Complete Order</span>
+                  <span class="order-completed" *ngIf="order.send != null && order.dateReceipt != null">Order has been completed</span>
+                </div>
+                <div class="order-status-value mrg-l-5">
+                  <div class="custom-dot" *ngIf="order.dateReceipt == null && order.send == null"></div>
+                  <img src="../../../assets/img/icon-tick-96.png" height="17px" *ngIf="order.dateReceipt != null">
+                  <img src="assets/img/icon-blue-tick.png" height="17px" *ngIf="order.dateReceipt == null && order.send != null">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <hr class="custom-line">
+      </div>
+    </ng-container>
+  </div>
+</div>

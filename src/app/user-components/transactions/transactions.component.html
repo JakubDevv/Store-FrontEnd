@@ -1,0 +1,204 @@
+<app-banner></app-banner>
+<div id="main">
+  <div id="header">
+    <div class="display-inline">
+      <span id="headerTitle">
+        Transactions
+      </span>
+      <span>
+        {{ transactions.length }}
+      </span>
+    </div>
+    <div id="balanceContainer">
+      <div id="balanceTitle">Actual balance</div>
+      <div id="balanceValue">{{ user.balance | number:'1.2-2' }} PLN</div>
+    </div>
+  </div>
+  <div id="transactions">
+    <div class="h-100-w-100">
+      <div class="timestamp roboto-medium" (click)="changeTime()">
+        Last
+        <br>
+        {{ activeFilter }}
+      </div>
+      <div class="stat-container">
+        <span class="stat-header">TRANSACTIONS</span>
+        <br>
+        <div class="space-between rbanist-regular">
+          <span class="roboto-medium">{{ stat.amountOfTransactions }}</span>
+          <div class="positiveChange center" *ngIf="stat.amountOfTransactionsChange > 0">
+              <img src="../../../assets/img/icon-arrow-60.png" height="20px" class="mg-r-3">
+            +{{ stat.amountOfTransactionsChange }}
+          </div>
+          <div class="negativeChange center" *ngIf="stat.amountOfTransactionsChange < 0">
+            <img src="../../../assets/img/icon-down-button-60.png" height="20px" class="mg-r-3">
+            {{ stat.amountOfTransactionsChange }}
+          </div>
+        </div>
+      </div>
+      <div class="stat-container">
+        <span class="stat-header" (click)="createChart()">TOTAL SPENT</span>
+        <br>
+        <div class="space-between urbanist-regular">
+          <span class="roboto-medium">${{ stat.spent | number:'1.2-2' }}</span>
+          <div class="positiveChange center" *ngIf="stat.spentChange > 0">
+            <img src="../../../assets/img/icon-arrow-60.png" height="20px" class="mg-r-3">
+            {{ stat.spentChange | number:'1.2-2' }}%
+          </div>
+        </div>
+      </div>
+      <div class="stat-container">
+        <span class="stat-header">TOTAL INCOME</span>
+        <br>
+        <div class="space-between urbanist-regular">
+          <span class="roboto-medium">${{ stat.income | number:'1.2-2' }}</span>
+          <div class="positiveChange center" *ngIf="stat.incomeChange > 0">
+            <img src="../../../assets/img/icon-arrow-60.png" height="20px" class="mg-r-3">
+            {{ stat.incomeChange | number:'1.2-2' }}%
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="tableHeader">
+      <div class="center2 headerColumn dateColumn">Date</div>
+      <div class="center2 headerColumn nameColumn">Name</div>
+      <div class="center2 headerColumn amountColumn">Amount</div>
+      <div class="center2 headerColumn orderIdColumn">Order Id</div>
+    </div>
+    <div class="transaction-list hide-scrollbar">
+      <ng-container *ngFor="let transaction of transactions">
+        <div class="tableRow" [class.selectedTransaction]="transaction.id == selectedId" (click)="selectedId = transaction.id">
+          <div class="tableColumn dateColumn">
+            <div class="transaction-date center3" [class.selectedTransaction]="transaction.id == selectedId">{{ transaction.date | date: 'dd/MM/yyyy' }}
+            </div>
+            <div class="transaction-time center3">{{ transaction.date | date: 'hh:mm a' }}
+            </div>
+          </div>
+          <div class="center2 tableColumn nameColumn">
+            <div class="h-100 w-70 center">
+              <div class="transaction-type-background center">
+                <img src="../../../assets/img/icon-down-right-2.png" width="30px" height="30px" *ngIf="transaction.type == 'RECEIVED'">
+                <img src="../../../assets/img/icon-up-right-3.png" width="30px" height="30px" *ngIf="transaction.type == 'SENT'">
+              </div>
+            </div>
+            <div class="h-100 w-330">
+              <div class="transaction-name" [class.selectedTransaction]="transaction.id == selectedId">{{ transaction.names.join(', ') }}
+              </div>
+              <div class="transaction-products" *ngIf="transaction.products">{{ transaction.products.join(', ') }}
+              </div>
+            </div>
+          </div>
+          <div class="center2 tableColumn amountColumn"
+               [class.selectedTransaction]="transaction.id == selectedId">{{ transaction.amount | number:'1.2-2' }} PLN
+          </div>
+          <div class="center2 tableColumn orderIdColumn" [class.selectedTransaction]="transaction.id == selectedId">
+            <span *ngIf="transaction.orderId != 0">
+              {{ transaction.orderId }}
+            </span>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div id="stats">
+    <div id="userCard" class="urbanist-regular">
+      <div id="userChange" class="center">
+        <img src="assets/img/Default-user-photo.png" id="profilePicture" class="image userPhoto" width="150px" height="150px">
+        <label for="profilePic">
+          <div class="changeProfilePictureButton2">
+            <span>Change Image</span>
+          </div>
+        </label>
+        <input id="profilePic" type="file" class="btn btn-warning changeProfilePictureButton" value="Changeimage2"
+               (change)="changeImage()"/>
+      </div>
+      <div class="user-data">
+        <div class="font name">{{ user.firstName }} {{ user.lastName }}</div>
+        <div class="font username">@{{ user.username }}</div>
+        <ng-container *ngIf="user.companyName != null; else createCompany">
+          <div class="company">
+            <div class="center companyNameHeader">
+              <span>Company Name</span>
+            </div>
+            <span class="companyNameValue">
+            {{ user.companyName }}
+          </span>
+          </div>
+        </ng-container>
+        <ng-template #createCompany>
+          <div class="companyCard">
+            <div class="center companyCard2">
+              <span>Company</span>
+            </div>
+          </div>
+          <div class="inpt">
+            <input type="text" class="inp" placeholder="Name" [(ngModel)]="companyName">
+            <img src="assets/img/icon-plus-math.png" width="30px" height="30px" role="button" (click)="createCompanyFunc()">
+          </div>
+        </ng-template>
+      </div>
+
+    </div>
+    <div class="h-790 urbanist-regular">
+      <div class="chart">
+        <canvas id="myChart2" #myChart2></canvas>
+      </div>
+      <div class="statContainer">
+        <div class="mainStat">
+          Average Monthly Spend
+          <span class="statValue">${{ stats.avgMonthlySpend }}</span>
+        </div>
+        <div class="stat">
+          <span class="statTitle">Last 6 month total Spend</span>
+          <span class="statValue">${{ stats.last6MonthTotal }}</span>
+        </div>
+        <hr class="customLine">
+        <div class="stat">
+          <span class="statTitle">Last 1 year total Spend</span>
+          <span class="statValue">${{ stats.lastYearTotal }}</span>
+        </div>
+      </div>
+      <div id="expensesTitle">
+        Expense by category
+      </div>
+      <div class="expensesByCategory">
+        <div class="expense firstExpense" *ngIf="stats?.expenseByCategory && stats.expenseByCategory.length > 0">
+          <div class="pieChart center">
+            <canvas id="myChart4" #myChart4></canvas>
+          </div>
+          <div class="expenseCategory">
+            {{ stats.expenseByCategory[0].category }}
+            <span class="expensePercentage firstExpensePercentage">{{ stats.expenseByCategory[0].percentage }}%</span>
+          </div>
+          <div class="expensePrice">
+            PLN {{ stats.expenseByCategory[0].amount | number: '1.2-2' }}
+          </div>
+        </div>
+        <div class="expense secondExpense" *ngIf="stats?.expenseByCategory && stats.expenseByCategory.length > 1">
+          <div class="pieChart center">
+            <canvas id="myChart5" #myChart5></canvas>
+          </div>
+          <div class="expenseCategory">
+            {{ stats.expenseByCategory[1].category }}
+            <span class="expensePercentage secondExpensePercentage">{{ stats.expenseByCategory[1].percentage }}%</span>
+          </div>
+          <div class="expensePrice">
+            PLN {{ stats.expenseByCategory[1].amount | number: '1.2-2' }}
+          </div>
+        </div>
+        <div class="expense thirdExpense" *ngIf="stats?.expenseByCategory && stats.expenseByCategory.length > 2">
+          <div class="pieChart center">
+            <canvas id="myChart6" #myChart6></canvas>
+          </div>
+          <div class="expenseCategory">
+            {{ stats.expenseByCategory[2].category }}
+            <span class="expensePercentage thirdExpensePercentage">{{ stats.expenseByCategory[2].percentage }}%</span>
+          </div>
+          <div class="expensePrice">
+            PLN {{ stats.expenseByCategory[2].amount | number: '1.2-2' }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

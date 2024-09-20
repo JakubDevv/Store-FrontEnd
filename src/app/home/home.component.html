@@ -1,0 +1,135 @@
+<app-banner></app-banner>
+<div id="main">
+  <div class="slideshow-container">
+    <img src="../../assets/img/home-banner.png">
+  </div>
+
+  <div class="stat-bar center">
+    <div class="stat-bar-2 center-vertically">
+      <div class="stat-container">
+        <div class="stat-value center roboto-black">
+          {{ stats.products }}
+        </div>
+        <div class="stat-name roboto-black2">
+          Products
+        </div>
+      </div>
+      <div class="stat-separator"></div>
+      <div class="stat-container">
+        <div class="stat-value center roboto-black">
+          {{ stats.users }}
+        </div>
+        <div class="stat-name roboto-black2">
+          Users
+        </div>
+      </div>
+      <div class="stat-separator"></div>
+      <div class="stat-container">
+        <div class="stat-value center roboto-black">
+          {{ stats.orders }}
+        </div>
+        <div class="stat-name roboto-black2">
+          Orders
+        </div>
+      </div>
+      <div class="stat-separator"></div>
+      <div class="stat-container">
+        <div class="stat-value center roboto-black">
+          4,2
+        </div>
+        <div class="stat-name roboto-black2">
+          Overall rating
+        </div>
+      </div>
+      <div class="stat-separator"></div>
+    </div>
+  </div>
+
+  <div id="customerFavorites">
+    <div id="customerFavoritesHeader">
+          <span id="customerFavoritesTitle">Customer Favorites</span>
+          <br>
+          <span id="customerFavoritesDescription">Check out online store of some of the best products</span>
+        <div style="height: 90px" class="width-100 center">
+          <div class="custom-button center-vertically roboto-black2">
+            View All
+            <img src="assets/img/icon-arrow-right.png" width="25px" height="25px">
+          </div>
+        </div>
+    </div>
+    <div id="customerFavoritesProducts">
+      <ng-container *ngFor="let product of productsMostPurchased">
+        <div class="customerFavoriteProduct" (click)="goToProduct(product.id)" (mouseenter)="showSecondImage(product)"
+             (mouseleave)="showFirstImage(product)">
+          <div class="customerFavoriteImageBackground">
+            <div class="top-product-button center">
+              <img src="assets/img/icon-up-right-2.png" width="15px" height="15px">
+            </div>
+            <img id="{{product.id}}" class="image"/>
+          </div>
+          <div class="width-100 center">
+            <div class="divs21">
+              {{ product.category }}
+            </div>
+          </div>
+          <div class="customerFavoriteProductTitle">
+            {{ product.title }}
+          </div>
+          <div class="customerFavoritePrice">
+            {{ product.price | number: '1.2-2' }} PLN
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="categories-container">
+    <div class="div-50 f-s-70 center-vertically anton-regular">Categories</div>
+    <div class="div-50">
+      <div class="urbanist-regular category-header center">
+        Find Products By Category
+      </div>
+      <div class="category-list">
+        <ng-container *ngFor="let category of categories">
+          <div class="categoryy center roboto-black2" (click)="setCategory(category.id)" [class.selected-category]="selectedCategory == category.id">
+            {{ category.name }}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div id="bestDeals">
+    <div id="bestDealsBar">
+      <ng-container *ngFor="let category of categories">
+        <ng-container *ngFor="let prod of category.products">
+          <div class="bestDealProduct" (click)="goToProduct(prod.id)" (mouseenter)="showSecondImage(prod)" (mouseleave)="showFirstImage(prod)" [hidden]="selectedCategory != category.id">
+            <div class="bestDealImageBackground">
+              <img [src]="productsPhotos.get(prod.id)" class="image"/>
+            </div>
+            <div class="bestDealTitle">
+              {{ prod.title }}
+            </div>
+            <div class="product-data">
+              <div class="bestDealDescription">
+                {{ prod.description }}
+              </div>
+              <div class="bestDealRating">
+                <div>
+                  <ng-container *ngFor="let rating of [].constructor(prod.starsRate)">
+                    <img src="../../assets/img/icon-star-filled.png" width="13" height="13">
+                  </ng-container>
+                  <ng-container *ngFor="let rating of [].constructor(5 - prod.starsRate)">
+                    <img src="../../assets/img/icon-star.png" width="13" height="13">
+                  </ng-container>
+                </div>
+                <div class="custom-product-button center">
+                  <img src="assets/img/icon-up-right-2.png" width="15px" height="15px">
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

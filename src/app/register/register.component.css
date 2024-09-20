@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+
+* {
+  font-family: "Urbanist", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.urbanist-regular {
+  font-family: "Urbanist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#main {
+  position: absolute;
+  width: 400px;
+  height: 520px;
+  top: calc(50% - 260px);
+  left: calc(50% - 200px);
+  font-family: 'Roboto', sans-serif;
+}
+
+.centerHorizontally {
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.hideText {
+  -webkit-text-security: disc;
+}
+
+button {
+  color: white;
+  background-color: black;
+  line-height: 1.5rem;
+  width: 100%;
+  border-radius: 20px;
+  height: 40px;
+  font-weight: 500;
+}
+
+.inputContainer {
+  height: 80px;
+}
+
+.inputContainer label {
+  font-weight: 500;
+  padding-bottom: 5px;
+}
+
+#signIn {
+  color: rgb(79 70 229);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.header-title {
+  width: 100%;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.header-sub-title {
+  width: 100%;
+  font-size: 15px;
+  color: gray;
+  margin-top: 10px;
+}
+
+.form-outer {
+  width: 50%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  float: left;
+}
