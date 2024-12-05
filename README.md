@@ -1,4 +1,9 @@
 # Several Page Views
+
+An online store application that allows users to add and manage products through an administration panel. The app also allows users to register, log in, place orders, track order status, and view/manage statistics.
+
+Stack: Angular, Spring Boot, Spring Security, Spring Data JPA, Hibernate, PostgreSQL, Redis, AWS S3, Liquibase, Docker
+
 ![Store_Home](https://github.com/user-attachments/assets/5add064a-3f5c-470b-8b8f-f1d8c5890668)
 
 ![Store_Product](https://github.com/user-attachments/assets/e74b0379-8add-4613-9f58-c8e828fa0414)
